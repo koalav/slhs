@@ -24,6 +24,7 @@ def main() -> int:
     run(["node", "--check", "docs/assets/base.js"])
     run(["node", "--check", "docs/assets/research.js"])
     run(["node", "--check", "docs/assets/simulator.js"])
+    run(["node", "--check", "docs/assets/backtest.js"])
     run(["node", "tests/simulator.test.js"])
     run([sys.executable, "tests/static_pages_test.py"])
     run([sys.executable, "tests/http_pages_test.py"])

@@ -37,6 +37,7 @@ function destroyCharts() {
 }
 
 function lineChart(canvasId, config) {
+  if (window.Chart) Chart.defaults.font.family = getComputedStyle(document.body).fontFamily;
   const chart = new Chart(b(canvasId), config);
   baseCharts.push(chart);
 }
@@ -66,20 +67,34 @@ function commonOptions(unit = "") {
 
 function renderSummary(payload) {
   const latest = payload.latest;
+  const definitionLabels = {
+    beta_samsung_on_skhynix: "삼성전자 on SK하이닉스 베타",
+    hedge_h: "헤지 h",
+    spread: "스프레드",
+    vol_hedge_h: "변동성 hedge h",
+  };
+  const definitionValues = {
+    "60D rolling beta from regressing Samsung daily log return on SK Hynix daily log return":
+      "삼성전자 일간 로그수익률을 SK하이닉스 일간 로그수익률에 대해 60일 rolling 회귀한 베타",
+    "log(Samsung/Samsung_0) - h * log(SK Hynix/SK Hynix_0)":
+      "log(삼성전자/시작가) - h * log(SK하이닉스/시작가)",
+    "Samsung 60D annualized volatility / SK Hynix 60D annualized volatility":
+      "삼성전자 60일 연율화 변동성 / SK하이닉스 60일 연율화 변동성",
+  };
   b("baseGeneratedAt").textContent = new Date(payload.generated_at).toLocaleString("ko-KR");
   b("periodText").textContent = `${payload.period.start} - ${payload.period.end}`;
-  b("observationText").textContent = `${payload.period.observations} trading sessions`;
+  b("observationText").textContent = `${payload.period.observations} 거래일`;
   b("samsung2y").textContent = baseFmt.pct(latest.samsung_return_2y);
-  b("samsungClose").textContent = `close ${baseFmt.price(latest.samsung_close)}`;
+  b("samsungClose").textContent = `종가 ${baseFmt.price(latest.samsung_close)}`;
   b("skhynix2y").textContent = baseFmt.pct(latest.skhynix_return_2y);
-  b("skhynixClose").textContent = `close ${baseFmt.price(latest.skhynix_close)}`;
+  b("skhynixClose").textContent = `종가 ${baseFmt.price(latest.skhynix_close)}`;
   b("baseSpreadZ").textContent = baseFmt.num(latest.spread_zscore_60d, 2);
   b("baseBeta").textContent = baseFmt.num(latest.beta_samsung_on_skhynix_60d, 2);
   b("baseCorr").textContent = baseFmt.num(latest.corr_60d, 2);
-  b("baseVolHedge").textContent = `vol h ${baseFmt.num(latest.vol_hedge_h_60d, 2)}`;
+  b("baseVolHedge").textContent = `변동성 h ${baseFmt.num(latest.vol_hedge_h_60d, 2)}`;
 
   b("definitionList").innerHTML = Object.entries(payload.definitions)
-    .map(([key, value]) => `<dt>${key}</dt><dd>${value}</dd>`)
+    .map(([key, value]) => `<dt>${definitionLabels[key] || key}</dt><dd>${definitionValues[value] || value}</dd>`)
     .join("");
 }
 
@@ -94,7 +109,7 @@ function renderBaseCharts(payload) {
       labels,
       datasets: [
         {
-          label: "Samsung",
+          label: "삼성전자",
           data: s.samsung_close,
           borderColor: "#2764c5",
           pointRadius: 0,
@@ -102,7 +117,7 @@ function renderBaseCharts(payload) {
           yAxisID: "s",
         },
         {
-          label: "SK Hynix",
+          label: "SK하이닉스",
           data: s.skhynix_close,
           borderColor: "#c23b31",
           pointRadius: 0,
@@ -127,14 +142,14 @@ function renderBaseCharts(payload) {
       labels,
       datasets: [
         {
-          label: "Samsung",
+          label: "삼성전자",
           data: s.samsung_normalized_return.map((v) => (v === null ? null : v * 100)),
           borderColor: "#2764c5",
           pointRadius: 0,
           borderWidth: 1.8,
         },
         {
-          label: "SK Hynix",
+          label: "SK하이닉스",
           data: s.skhynix_normalized_return.map((v) => (v === null ? null : v * 100)),
           borderColor: "#c23b31",
           pointRadius: 0,
@@ -151,7 +166,7 @@ function renderBaseCharts(payload) {
       labels,
       datasets: [
         {
-          label: "Spread",
+          label: "스프레드",
           data: s.spread,
           borderColor: "#11845b",
           pointRadius: 0,
@@ -159,7 +174,7 @@ function renderBaseCharts(payload) {
           yAxisID: "spread",
         },
         {
-          label: "60D Z-score",
+          label: "60일 Z값",
           data: s.spread_zscore_60d,
           borderColor: "#b7791f",
           pointRadius: 0,
@@ -184,14 +199,14 @@ function renderBaseCharts(payload) {
       labels,
       datasets: [
         {
-          label: "Beta Samsung on SK Hynix",
+          label: "삼성전자 on SK하이닉스 베타",
           data: s.beta_samsung_on_skhynix_60d,
           borderColor: "#2764c5",
           pointRadius: 0,
           borderWidth: 1.8,
         },
         {
-          label: "Vol hedge h",
+          label: "변동성 hedge h",
           data: s.vol_hedge_h_60d,
           borderColor: "#11845b",
           pointRadius: 0,
@@ -208,7 +223,7 @@ function renderBaseCharts(payload) {
       labels,
       datasets: [
         {
-          label: "Correlation 60D",
+          label: "60일 상관",
           data: s.corr_60d,
           borderColor: "#334155",
           pointRadius: 0,
@@ -216,7 +231,7 @@ function renderBaseCharts(payload) {
           yAxisID: "corr",
         },
         {
-          label: "Samsung vol 60D",
+          label: "삼성전자 60일 변동성",
           data: s.samsung_vol_60d.map((v) => (v === null ? null : v * 100)),
           borderColor: "#2764c5",
           pointRadius: 0,
@@ -224,7 +239,7 @@ function renderBaseCharts(payload) {
           yAxisID: "vol",
         },
         {
-          label: "SK Hynix vol 60D",
+          label: "SK하이닉스 60일 변동성",
           data: s.skhynix_vol_60d.map((v) => (v === null ? null : v * 100)),
           borderColor: "#c23b31",
           pointRadius: 0,
@@ -253,14 +268,14 @@ function renderBaseCharts(payload) {
       labels,
       datasets: [
         {
-          label: "SK/Samsung market cap",
+          label: "SK/삼성 시총",
           data: s.mcap_ratio.map((v) => (v === null ? null : v * 100)),
           borderColor: "#b7791f",
           pointRadius: 0,
           borderWidth: 1.8,
         },
         {
-          label: "20D MA",
+          label: "20일 평균",
           data: s.mcap_ratio_ma20.map((v) => (v === null ? null : v * 100)),
           borderColor: "#334155",
           pointRadius: 0,
@@ -275,6 +290,7 @@ function renderBaseCharts(payload) {
 
 async function refreshBase() {
   const payload = await loadBase();
+  if (document.fonts?.ready) await document.fonts.ready;
   renderSummary(payload);
   if (window.Chart) renderBaseCharts(payload);
 }
@@ -282,6 +298,6 @@ async function refreshBase() {
 window.addEventListener("DOMContentLoaded", () => {
   refreshBase().catch((error) => {
     console.error(error);
-    b("baseGeneratedAt").textContent = "load failed";
+    b("baseGeneratedAt").textContent = "로드 실패";
   });
 });

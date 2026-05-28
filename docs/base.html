@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="color-scheme" content="light" />
-    <title>SHLS Base Materials</title>
+    <title>SHLS 기초자료</title>
     <link rel="stylesheet" href="assets/styles.css" />
     <script defer src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
     <script defer src="assets/base.js"></script>
@@ -12,13 +12,14 @@
   <body>
     <header class="topbar">
       <div>
-        <h1>SHLS Base Materials</h1>
-        <p>2Y price, spread, beta, correlation, volatility, and market-cap ratio</p>
+        <h1>SHLS 기초자료</h1>
+        <p>최근 2년 가격, 스프레드, 베타, 상관, 변동성, 시총 비율</p>
       </div>
       <div class="status-strip">
-        <a class="nav-link" href="index.html">Dashboard</a>
-        <a class="nav-link" href="research.html">Research</a>
-        <a class="nav-link" href="simulator.html">Simulator</a>
+        <a class="nav-link" href="index.html">대시보드</a>
+        <a class="nav-link" href="research.html">리서치</a>
+        <a class="nav-link" href="simulator.html">시뮬레이터</a>
+        <a class="nav-link" href="backtest.html">백테스트</a>
         <span id="baseGeneratedAt" class="muted">-</span>
       </div>
     </header>
@@ -26,32 +27,32 @@
     <main>
       <section class="summary-grid base-summary">
         <article class="metric-card">
-          <span>Period</span>
+          <span class="label-line">기간 <span class="help" tabindex="0" title="차트와 rolling 지표 산출에 사용한 관측 기간입니다.">?</span></span>
           <strong id="periodText">-</strong>
           <small id="observationText">-</small>
         </article>
         <article class="metric-card">
-          <span>Samsung 2Y</span>
+          <span class="label-line">삼성전자 2년 <span class="help" tabindex="0" title="조회 기간 시작점 대비 삼성전자 가격 수익률입니다.">?</span></span>
           <strong id="samsung2y">-</strong>
           <small id="samsungClose">-</small>
         </article>
         <article class="metric-card">
-          <span>SK Hynix 2Y</span>
+          <span class="label-line">SK하이닉스 2년 <span class="help" tabindex="0" title="조회 기간 시작점 대비 SK하이닉스 가격 수익률입니다.">?</span></span>
           <strong id="skhynix2y">-</strong>
           <small id="skhynixClose">-</small>
         </article>
         <article class="metric-card">
-          <span>Spread Z 60D</span>
+          <span class="label-line">60일 스프레드 Z값 <span class="help" tabindex="0" title="가중 스프레드의 60일 표준화 값입니다. 음수가 낮을수록 삼성전자 상대 약세가 큽니다.">?</span></span>
           <strong id="baseSpreadZ">-</strong>
-          <small>h = 0.66 weighted spread</small>
+          <small>h = 0.66 가중 스프레드</small>
         </article>
         <article class="metric-card">
-          <span>Beta 60D</span>
+          <span class="label-line">60일 베타 <span class="help" tabindex="0" title="SK하이닉스 일간 수익률에 대한 삼성전자 일간 수익률의 rolling 회귀 베타입니다.">?</span></span>
           <strong id="baseBeta">-</strong>
-          <small>Samsung on SK Hynix</small>
+          <small>삼성전자 on SK하이닉스</small>
         </article>
         <article class="metric-card">
-          <span>Correlation 60D</span>
+          <span class="label-line">60일 상관 <span class="help" tabindex="0" title="두 종목 일간 수익률의 60일 rolling 상관계수입니다.">?</span></span>
           <strong id="baseCorr">-</strong>
           <small id="baseVolHedge">-</small>
         </article>
@@ -60,15 +61,15 @@
       <section class="chart-grid">
         <article class="chart-panel">
           <div class="section-head">
-            <h2>Raw Price</h2>
-            <span class="muted">separate axes</span>
+            <h2 class="title-line">원 가격 <span class="help" tabindex="0" title="두 종목 가격 수준 차이가 커서 좌우 축을 따로 사용합니다.">?</span></h2>
+            <span class="muted">분리 축</span>
           </div>
           <canvas id="rawPriceChart"></canvas>
         </article>
         <article class="chart-panel">
           <div class="section-head">
-            <h2>Normalized Return</h2>
-            <span class="muted">start = 0%</span>
+            <h2 class="title-line">정규화 수익률 <span class="help" tabindex="0" title="시작일을 0%로 맞춰 상대 성과를 비교합니다.">?</span></h2>
+            <span class="muted">시작점 = 0%</span>
           </div>
           <canvas id="normalizedChart"></canvas>
         </article>
@@ -77,15 +78,15 @@
       <section class="chart-grid">
         <article class="chart-panel">
           <div class="section-head">
-            <h2>Weighted Spread</h2>
-            <span class="muted">spread and 60D z-score</span>
+            <h2 class="title-line">가중 스프레드 <span class="help" tabindex="0" title="삼성전자 상대 수익률에서 h를 반영한 SK하이닉스 상대 수익률을 뺀 값입니다.">?</span></h2>
+            <span class="muted">스프레드와 60일 Z값</span>
           </div>
           <canvas id="baseSpreadChart"></canvas>
         </article>
         <article class="chart-panel">
           <div class="section-head">
-            <h2>60D Beta</h2>
-            <span class="muted">rolling regression beta</span>
+            <h2 class="title-line">60일 베타 <span class="help" tabindex="0" title="rolling 회귀 베타와 변동성 기반 hedge h를 같이 보여줍니다.">?</span></h2>
+            <span class="muted">rolling 회귀 베타</span>
           </div>
           <canvas id="betaChart"></canvas>
         </article>
@@ -94,22 +95,22 @@
       <section class="chart-grid">
         <article class="chart-panel">
           <div class="section-head">
-            <h2>60D Correlation & Volatility</h2>
-            <span class="muted">annualized vol</span>
+            <h2 class="title-line">60일 상관과 변동성 <span class="help" tabindex="0" title="두 종목 상관과 연율화 변동성을 같이 확인합니다.">?</span></h2>
+            <span class="muted">연율화 변동성</span>
           </div>
           <canvas id="riskChart"></canvas>
         </article>
         <article class="chart-panel">
           <div class="section-head">
-            <h2>Market Cap Ratio</h2>
-            <span class="muted">SK Hynix / Samsung</span>
+            <h2 class="title-line">시총 비율 <span class="help" tabindex="0" title="SK하이닉스 시총을 삼성전자 시총으로 나눈 값과 20일 평균입니다.">?</span></h2>
+            <span class="muted">SK하이닉스 / 삼성전자</span>
           </div>
           <canvas id="mcapChart"></canvas>
         </article>
       </section>
 
       <section class="panel prose-panel">
-        <h2>Definitions</h2>
+        <h2 class="title-line">정의 <span class="help" tabindex="0" title="페이지에서 쓰는 주요 지표의 계산 정의입니다.">?</span></h2>
         <dl class="detail-list definitions" id="definitionList"></dl>
       </section>
     </main>

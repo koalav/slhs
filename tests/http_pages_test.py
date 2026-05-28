@@ -26,7 +26,7 @@ def main() -> None:
     thread.start()
     base_url = f"http://127.0.0.1:{server.server_port}"
     try:
-        for path in ["/", "/index.html", "/base.html", "/research.html", "/simulator.html"]:
+        for path in ["/", "/index.html", "/base.html", "/research.html", "/simulator.html", "/backtest.html"]:
             body = fetch(base_url, path)
             assert b"<!doctype html>" in body.lower(), path
 
@@ -35,6 +35,7 @@ def main() -> None:
             "/assets/base.js",
             "/assets/research.js",
             "/assets/simulator.js",
+            "/assets/backtest.js",
             "/assets/styles.css",
         ]:
             assert len(fetch(base_url, path)) > 100, path

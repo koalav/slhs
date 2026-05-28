@@ -100,10 +100,10 @@ def load_global_factors(path: str | Path) -> list[dict[str, Any]]:
 
 def _coverage(targets: list[Any], earnings: list[Any], articles: list[Any], global_factors: list[Any]) -> list[dict[str, Any]]:
     checks = [
-        ("expected_target_price", "Target price", len(targets) > 0, len(targets)),
-        ("earnings_trend", "Earnings trend", len(earnings) > 0, len(earnings)),
-        ("major_articles", "Major articles", len(articles) > 0, len(articles)),
-        ("global_memory_factors", "Memory/global factors", len(global_factors) > 0, len(global_factors)),
+        ("expected_target_price", "예상 목표가", len(targets) > 0, len(targets)),
+        ("earnings_trend", "실적 추이", len(earnings) > 0, len(earnings)),
+        ("major_articles", "주요 기사", len(articles) > 0, len(articles)),
+        ("global_memory_factors", "메모리/글로벌 요소", len(global_factors) > 0, len(global_factors)),
     ]
     return [
         {"key": key, "label": label, "available": available, "rows": rows}

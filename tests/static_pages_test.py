@@ -35,7 +35,7 @@ def check_required_ids(html_path: str, js_path: str) -> None:
     html = read(html_path)
     js = read(js_path)
     ids = set(re.findall(r'id="([^"]+)"', html))
-    referenced = set(re.findall(r'\b[serb]\("([^"]+)"\)', js))
+    referenced = set(re.findall(r'\b(?:[serb]|bt)\("([^"]+)"\)', js))
     missing = sorted(referenced - ids)
     assert not missing, f"{html_path} missing ids referenced by {js_path}: {missing}"
 
@@ -46,6 +46,7 @@ def main() -> None:
         "docs/base.html",
         "docs/research.html",
         "docs/simulator.html",
+        "docs/backtest.html",
     ]:
         check_html_assets(path)
 
@@ -53,6 +54,7 @@ def main() -> None:
     check_required_ids("docs/base.html", "docs/assets/base.js")
     check_required_ids("docs/research.html", "docs/assets/research.js")
     check_required_ids("docs/simulator.html", "docs/assets/simulator.js")
+    check_required_ids("docs/backtest.html", "docs/assets/backtest.js")
 
     latest = json.loads(read("docs/data/latest.json"))
     base = json.loads(read("docs/data/base.json"))

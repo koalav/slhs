@@ -18,15 +18,24 @@ const fmt = {
   krw(value) {
     if (value === null || value === undefined || Number.isNaN(value)) return "-";
     const abs = Math.abs(value);
-    if (abs >= 1_000_000_000_000) return `${fmt.num(value / 1_000_000_000_000, 1)}T KRW`;
-    if (abs >= 1_000_000_000) return `${fmt.num(value / 1_000_000_000, 1)}B KRW`;
-    if (abs >= 1_000_000) return `${fmt.num(value / 1_000_000, 1)}M KRW`;
-    if (abs >= 1_000) return `${fmt.num(value / 1_000, 1)}K KRW`;
-    return `${Math.round(value).toLocaleString("ko-KR")} KRW`;
+    if (abs >= 1_000_000_000_000) return `${fmt.num(value / 1_000_000_000_000, 1)}조원`;
+    if (abs >= 100_000_000) return `${fmt.num(value / 100_000_000, 1)}억원`;
+    if (abs >= 10_000) return `${fmt.num(value / 10_000, 1)}만원`;
+    return `${Math.round(value).toLocaleString("ko-KR")}원`;
   },
   price(value) {
     if (value === null || value === undefined || Number.isNaN(value)) return "-";
     return Math.round(value).toLocaleString("ko-KR");
+  },
+  count(value) {
+    if (value === null || value === undefined || Number.isNaN(value)) return "-";
+    return Math.round(value).toLocaleString("ko-KR");
+  },
+  time(value) {
+    if (!value) return "-";
+    const date = new Date(value);
+    if (Number.isNaN(date.getTime())) return value;
+    return date.toLocaleTimeString("ko-KR", { hour: "2-digit", minute: "2-digit" });
   },
 };
 
@@ -45,10 +54,25 @@ function actionClass(action) {
   return "bad";
 }
 
+function actionLabel(action, fallback) {
+  const labels = {
+    ENTER_1H: "진입",
+    TEST_1H: "소규모 테스트",
+    WAIT_FOR_REVERSAL: "반전 대기",
+    WATCH: "관찰",
+    AVOID: "회피",
+  };
+  return labels[action] || fallback || "-";
+}
+
 function normalize(values) {
   const first = values.find((v) => v !== null && v !== undefined);
   if (!first) return values.map(() => null);
   return values.map((v) => (v === null || v === undefined ? null : (v / first - 1) * 100));
+}
+
+function applyChartFont() {
+  if (window.Chart) Chart.defaults.font.family = getComputedStyle(document.body).fontFamily;
 }
 
 async function loadSnapshot() {
@@ -66,25 +90,25 @@ function renderSummary(snapshot) {
 
   el("scoreValue").textContent = `${score.total}`;
   el("scoreBar").style.width = `${Math.min(100, score.total)}%`;
-  el("actionLabel").textContent = score.action_label;
+  el("actionLabel").textContent = actionLabel(score.action, score.action_label);
   el("actionLabel").className = `pill ${actionClass(score.action)}`;
   el("mcapRatio").textContent = fmt.pct(metrics.mcap_ratio, 1);
-  el("mcapRatioMa").textContent = `20D MA ${fmt.pct(metrics.mcap_ratio_ma20, 1)}`;
+  el("mcapRatioMa").textContent = `20일 평균 ${fmt.pct(metrics.mcap_ratio_ma20, 1)}`;
   el("spreadZ").textContent = fmt.num(metrics.spread_zscore, 2);
   el("spreadRequired").textContent = score.required.spread_reversal_confirmed
-    ? "reversal confirmed"
-    : "waiting for reversal";
+    ? "반전 확인"
+    : "반전 대기";
   el("actualHedge").textContent = fmt.num(position.actual_hedge_h, 3);
-  el("grossNotional").textContent = `gross ${fmt.krw(position.gross_notional_krw)}`;
+  el("grossNotional").textContent = `총 노출 ${fmt.krw(position.gross_notional_krw)}`;
 
   const components = score.components;
   const labels = {
-    value_gap: "Value gap",
-    spread_oversold: "Spread oversold",
-    spread_reversal: "Spread reversal",
-    earnings_revision: "Earnings revision",
-    hbm_event: "HBM event",
-    hynix_fade: "Hynix fade",
+    value_gap: "가치 격차",
+    spread_oversold: "스프레드 과매도",
+    spread_reversal: "스프레드 반전",
+    earnings_revision: "실적 수정",
+    hbm_event: "HBM 이벤트",
+    hynix_fade: "SK하이닉스 둔화",
   };
   el("scoreComponents").innerHTML = Object.entries(components)
     .map(([key, value]) => `<dt>${labels[key] || key}</dt><dd>${value}</dd>`)
@@ -99,12 +123,16 @@ function renderMarket(snapshot) {
       const item = equities[key];
       const change = item.change_pct;
       const changeHtml = `<span class="${change >= 0 ? "pos" : "neg"}">${fmt.pct(change)}</span>`;
+      const name = key === "samsung" ? "삼성전자" : "SK하이닉스";
       return `<tr>
-        <td>${item.name}</td>
+        <td>${name}</td>
         <td>${fmt.price(item.price)}</td>
         <td>${changeHtml}</td>
+        <td>${fmt.count(item.intraday_volume)}</td>
+        <td>${fmt.krw(item.intraday_trading_value_krw)}</td>
         <td>${fmt.krw(item.market_cap_krw)}</td>
         <td>${fmt.num(item.pbr, 2)}</td>
+        <td>${fmt.time(item.updated_at)}</td>
       </tr>`;
     })
     .join("");
@@ -126,44 +154,48 @@ function renderRisk(snapshot) {
 
 function renderConsensus(snapshot) {
   const consensus = snapshot.signals.consensus;
-  el("consensusDate").textContent = consensus.available ? consensus.latest_date : "not available";
+  el("consensusDate").textContent = consensus.available
+    ? `스냅샷 ${consensus.latest_date}, 기준 ${consensus.reference_date || "-"}`
+    : "데이터 없음";
   if (!consensus.available) {
-    el("consensusDetails").innerHTML = "<dt>Status</dt><dd>no CSV rows</dd>";
+    el("consensusRows").innerHTML = "<tr><td colspan=\"4\">CSV 데이터가 없습니다.</td></tr>";
     return;
   }
   const rows = [
-    ["Samsung target upside", fmt.pct(consensus.samsung_target_upside)],
-    ["SK Hynix target upside", fmt.pct(consensus.skhynix_target_upside)],
-    ["Target pair signal", fmt.pct(consensus.target_pair_signal)],
-    ["Samsung OP revision", fmt.pct(consensus.samsung_op_2026_revision)],
-    ["SK Hynix OP revision", fmt.pct(consensus.skhynix_op_2026_revision)],
-    ["Revision diff", fmt.pct(consensus.revision_diff)],
+    [
+      "목표가",
+      fmt.price(consensus.samsung_target_price),
+      fmt.price(consensus.skhynix_target_price),
+      "현재가 대비 업사이드 비교",
+    ],
+    [
+      "목표가 업사이드",
+      fmt.pct(consensus.samsung_target_upside),
+      fmt.pct(consensus.skhynix_target_upside),
+      fmt.pct(consensus.target_pair_signal),
+    ],
+    [
+      "2026 영업이익 수정률",
+      fmt.pct(consensus.samsung_op_2026_revision),
+      fmt.pct(consensus.skhynix_op_2026_revision),
+      fmt.pct(consensus.revision_diff),
+    ],
+    ["메모", consensus.raw_note || "-", "-", "수동/시드 데이터"],
   ];
-  el("consensusDetails").innerHTML = rows
-    .map(([label, value]) => `<dt>${label}</dt><dd>${value}</dd>`)
+  el("consensusRows").innerHTML = rows
+    .map(
+      ([label, samsung, hynix, diff]) => `<tr>
+        <td>${label}</td>
+        <td>${samsung}</td>
+        <td>${hynix}</td>
+        <td>${diff}</td>
+      </tr>`,
+    )
     .join("");
 }
 
-function renderEvents(snapshot) {
-  const tape = snapshot.signals.hbm_events;
-  el("eventScore").textContent = tape.available ? `score ${tape.score}, net ${tape.net_score}` : "not available";
-  const rows = tape.events || [];
-  el("eventRows").innerHTML = rows.length
-    ? rows
-        .map((event) => {
-          const dir = event.direction > 0 ? "+1" : event.direction < 0 ? "-1" : "0";
-          return `<tr>
-            <td>${event.date}</td>
-            <td>${event.company}</td>
-            <td class="${event.direction > 0 ? "pos" : event.direction < 0 ? "neg" : ""}">${dir}</td>
-            <td>${event.note}</td>
-          </tr>`;
-        })
-        .join("")
-    : "<tr><td colspan=\"4\">No recent events</td></tr>";
-}
-
 function renderCharts(snapshot) {
+  applyChartFont();
   const series = snapshot.signals.series;
   const labels = series.dates;
   const samsungNorm = normalize(series.samsung_close);
@@ -175,7 +207,7 @@ function renderCharts(snapshot) {
       labels,
       datasets: [
         {
-          label: "Samsung",
+          label: "삼성전자",
           data: samsungNorm,
           borderColor: "#2764c5",
           backgroundColor: "transparent",
@@ -183,7 +215,7 @@ function renderCharts(snapshot) {
           borderWidth: 2,
         },
         {
-          label: "SK Hynix",
+          label: "SK하이닉스",
           data: hynixNorm,
           borderColor: "#c23b31",
           backgroundColor: "transparent",
@@ -201,7 +233,7 @@ function renderCharts(snapshot) {
       labels,
       datasets: [
         {
-          label: "Spread",
+          label: "스프레드",
           data: series.spread,
           borderColor: "#11845b",
           yAxisID: "y",
@@ -209,7 +241,7 @@ function renderCharts(snapshot) {
           borderWidth: 2,
         },
         {
-          label: "Z-score",
+          label: "Z값",
           data: series.spread_zscore,
           borderColor: "#b7791f",
           yAxisID: "z",
@@ -261,24 +293,24 @@ function chartOptions(suffix) {
 function renderMeta(snapshot) {
   const generated = new Date(snapshot.generated_at);
   el("generatedAt").textContent = generated.toLocaleString("ko-KR");
-  el("refreshState").textContent = snapshot.data_warning ? "fixture" : "live snapshot";
+  el("refreshState").textContent = snapshot.data_warning ? "샘플" : "스냅샷";
   el("refreshState").className = `pill ${snapshot.data_warning ? "warn" : "good"}`;
 }
 
 async function refresh() {
   try {
     const snapshot = await loadSnapshot();
+    if (document.fonts?.ready) await document.fonts.ready;
     renderMeta(snapshot);
     renderSummary(snapshot);
     renderMarket(snapshot);
     renderRisk(snapshot);
     renderConsensus(snapshot);
-    renderEvents(snapshot);
     if (window.Chart) {
       renderCharts(snapshot);
     }
   } catch (error) {
-    el("refreshState").textContent = "load failed";
+    el("refreshState").textContent = "로드 실패";
     el("refreshState").className = "pill bad";
     console.error(error);
   }

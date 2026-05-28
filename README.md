@@ -50,8 +50,8 @@ Use `docs/` as the Pages publishing directory. The dashboard reads `docs/data/la
 - `docs/base.html`: two-year base chart pack
 - `docs/research.html`: target price, earnings, articles, global memory factors
 - `docs/simulator.html`: interactive h/backtest/forecast/margin simulator
+- `docs/backtest.html`: simple entry-date and position-size PnL backtest
 
 ## Data Notes
 
 The core collector uses Yahoo chart data and Naver Finance with no API key. These are suitable for monitoring and prototyping, but not exchange-grade execution. True real-time quotes, futures order books, investor flow, and account margin should be integrated through a broker API such as KIS OpenAPI, Kiwoom, or CYBOS Plus.
-# slhs

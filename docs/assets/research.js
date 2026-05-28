@@ -40,12 +40,24 @@ function renderCoverage(payload) {
   r("coverageGrid").innerHTML = payload.coverage
     .map(
       (item) => `<article class="metric-card">
-        <span>${item.label}</span>
-        <strong>${item.available ? "OK" : "Missing"}</strong>
-        <small>${item.rows} rows</small>
+        <span class="label-line">${item.label}<span class="help" tabindex="0" title="${item.label} 데이터가 현재 JSON에 포함되어 있는지 확인합니다.">?</span></span>
+        <strong>${item.available ? "확인" : "누락"}</strong>
+        <small>${item.rows}건</small>
       </article>`,
     )
     .join("");
+}
+
+function companyName(value) {
+  if (value === "Samsung Electronics" || value === "Samsung") return "삼성전자";
+  if (value === "SK Hynix") return "SK하이닉스";
+  return value;
+}
+
+function periodType(value) {
+  if (value === "actual") return "실적";
+  if (value === "estimate") return "추정";
+  return value;
 }
 
 function renderTables(payload) {
@@ -53,7 +65,7 @@ function renderTables(payload) {
     .map(
       (row) => `<tr>
         <td>${row.date}</td>
-        <td>${row.company}</td>
+        <td>${companyName(row.company)}</td>
         <td><a href="${row.source_url}" target="_blank" rel="noreferrer">${row.source}</a></td>
         <td>${rf.krw(row.target_price_krw)}</td>
         <td class="${directionClass(row.upside_pct)}">${rf.pct(row.upside_pct)}</td>
@@ -65,8 +77,8 @@ function renderTables(payload) {
     .map(
       (row) => `<tr>
         <td>${row.period}</td>
-        <td>${row.period_type}</td>
-        <td>${row.company}</td>
+        <td>${periodType(row.period_type)}</td>
+        <td>${companyName(row.company)}</td>
         <td>${rf.num(row.revenue_krw_t)}</td>
         <td>${rf.num(row.operating_profit_krw_t)}</td>
         <td>${Number.isFinite(row.op_margin_pct) ? `${rf.num(row.op_margin_pct)}%` : "-"}</td>
@@ -80,7 +92,7 @@ function renderTables(payload) {
         <div class="article-meta">
           <span>${row.date}</span>
           <span>${row.publisher}</span>
-          <span class="${directionClass(row.direction)}">dir ${row.direction}</span>
+          <span class="${directionClass(row.direction)}">방향 ${row.direction}</span>
         </div>
         <h3><a href="${row.source_url}" target="_blank" rel="noreferrer">${row.title}</a></h3>
         <p>${row.summary}</p>
@@ -93,7 +105,7 @@ function renderTables(payload) {
       (row) => `<tr>
         <td>${row.date}</td>
         <td>${row.category}</td>
-        <td>${row.company}</td>
+        <td>${companyName(row.company)}</td>
         <td>${row.metric}</td>
         <td>${row.value}${row.unit && row.unit !== "text" ? row.unit : ""}</td>
         <td class="${directionClass(row.direction)}">${row.direction}</td>
@@ -103,6 +115,7 @@ function renderTables(payload) {
 }
 
 function renderCharts(payload) {
+  if (window.Chart) Chart.defaults.font.family = getComputedStyle(document.body).fontFamily;
   if (researchCharts.target) researchCharts.target.destroy();
   if (researchCharts.earnings) researchCharts.earnings.destroy();
 
@@ -110,10 +123,10 @@ function renderCharts(payload) {
   researchCharts.target = new Chart(r("targetChart"), {
     type: "bar",
     data: {
-      labels: targetRows.map((row) => `${row.company.replace(" Electronics", "")} / ${row.source.split(" ")[0]}`),
+      labels: targetRows.map((row) => `${companyName(row.company)} / ${row.source.split(" ")[0]}`),
       datasets: [
         {
-          label: "Upside",
+          label: "업사이드",
           data: targetRows.map((row) => row.upside_pct * 100),
           backgroundColor: targetRows.map((row) => (row.upside_pct >= 0 ? "#bde6d2" : "#f0c6c1")),
           borderColor: targetRows.map((row) => (row.upside_pct >= 0 ? "#11845b" : "#c23b31")),
@@ -128,10 +141,10 @@ function renderCharts(payload) {
   researchCharts.earnings = new Chart(r("earningsChart"), {
     type: "bar",
     data: {
-      labels: earnings.map((row) => `${row.period} ${row.company.replace(" Electronics", "")}`),
+      labels: earnings.map((row) => `${row.period} ${companyName(row.company)}`),
       datasets: [
         {
-          label: "Operating profit",
+          label: "영업이익",
           data: earnings.map((row) => row.operating_profit_krw_t),
           backgroundColor: earnings.map((row) =>
             row.company.includes("Samsung") ? "#cfe0ff" : "#f8d7d4",
@@ -171,6 +184,7 @@ function chartOptions(unit) {
 
 async function initResearch() {
   const payload = await loadResearch();
+  if (document.fonts?.ready) await document.fonts.ready;
   r("researchGeneratedAt").textContent = new Date(payload.generated_at).toLocaleString("ko-KR");
   renderCoverage(payload);
   renderTables(payload);
@@ -180,6 +194,6 @@ async function initResearch() {
 window.addEventListener("DOMContentLoaded", () => {
   initResearch().catch((error) => {
     console.error(error);
-    r("researchGeneratedAt").textContent = "load failed";
+    r("researchGeneratedAt").textContent = "로드 실패";
   });
 });

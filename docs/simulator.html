@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="color-scheme" content="light" />
-    <title>SHLS Interactive Simulator</title>
+    <title>SHLS 인터랙티브 시뮬레이터</title>
     <link rel="stylesheet" href="assets/styles.css" />
     <script defer src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
     <script defer src="assets/simulator.js"></script>
@@ -12,13 +12,14 @@
   <body>
     <header class="topbar">
       <div>
-        <h1>SHLS Interactive Simulator</h1>
-        <p>h, exposure, forecast price, backtest, and margin monitor</p>
+        <h1>SHLS 인터랙티브 시뮬레이터</h1>
+        <p>h, 노출, 예상 가격, 백테스트, 증거금 모니터</p>
       </div>
       <div class="status-strip">
-        <a class="nav-link" href="index.html">Dashboard</a>
-        <a class="nav-link" href="base.html">Base</a>
-        <a class="nav-link" href="research.html">Research</a>
+        <a class="nav-link" href="index.html">대시보드</a>
+        <a class="nav-link" href="base.html">기초자료</a>
+        <a class="nav-link" href="research.html">리서치</a>
+        <a class="nav-link" href="backtest.html">백테스트</a>
         <span id="simGeneratedAt" class="muted">-</span>
       </div>
     </header>
@@ -26,32 +27,32 @@
     <main>
       <section class="summary-grid simulator-summary">
         <article class="metric-card">
-          <span>Samsung Now</span>
+          <span class="label-line">삼성전자 현재가 <span class="help" tabindex="0" title="latest.json에서 읽은 삼성전자 현재가입니다.">?</span></span>
           <strong id="simSamsungNow">-</strong>
           <small id="simSamsungMove">-</small>
         </article>
         <article class="metric-card">
-          <span>SK Hynix Now</span>
+          <span class="label-line">SK하이닉스 현재가 <span class="help" tabindex="0" title="latest.json에서 읽은 SK하이닉스 현재가입니다.">?</span></span>
           <strong id="simHynixNow">-</strong>
           <small id="simHynixMove">-</small>
         </article>
         <article class="metric-card">
-          <span>h</span>
+          <span class="label-line">h <span class="help" tabindex="0" title="SK하이닉스 숏 명목금액 / 삼성전자 롱 명목금액입니다.">?</span></span>
           <strong id="simHValue">-</strong>
-          <small>SK short notional / Samsung long notional</small>
+          <small>SK 숏 / 삼성 롱 명목금액</small>
         </article>
         <article class="metric-card">
-          <span>Expected PnL</span>
+          <span class="label-line">예상 손익 <span class="help" tabindex="0" title="예상 가격까지 이동한다고 가정한 왕복 비용 차감 후 순손익입니다.">?</span></span>
           <strong id="expectedPnl">-</strong>
           <small id="expectedRoi">-</small>
         </article>
         <article class="metric-card">
-          <span>Required Margin</span>
+          <span class="label-line">필요 증거금 <span class="help" tabindex="0" title="각 레그 명목금액에 입력한 증거금률을 곱한 단순 필요 증거금입니다.">?</span></span>
           <strong id="requiredMargin">-</strong>
           <small id="marginRateText">-</small>
         </article>
         <article class="metric-card">
-          <span>Recommended Buffer</span>
+          <span class="label-line">권장 증거금 <span class="help" tabindex="0" title="필요 증거금에 버퍼 배수를 곱하고 진입 비용을 더한 보수적 기준입니다.">?</span></span>
           <strong id="recommendedMargin">-</strong>
           <small id="marginBufferText">-</small>
         </article>
@@ -59,17 +60,17 @@
 
       <section class="panel control-panel">
         <div class="section-head">
-          <h2>Controls</h2>
+          <h2 class="title-line">입력값 <span class="help" tabindex="0" title="h, 계약 수, 예상 가격, 비용, 증거금률을 바꾸면 모든 결과가 즉시 재계산됩니다.">?</span></h2>
           <span class="muted" id="simPeriod">-</span>
         </div>
         <div class="control-grid">
           <label>
-            <span>h source</span>
+            <span>h 기준</span>
             <select id="hMode">
-              <option value="signal">Signal h</option>
-              <option value="beta">60D rolling beta</option>
-              <option value="vol">60D volatility h</option>
-              <option value="manual">Manual h</option>
+              <option value="signal">시그널 h</option>
+              <option value="beta">60일 rolling 베타</option>
+              <option value="vol">60일 변동성 h</option>
+              <option value="manual">수동 h</option>
             </select>
           </label>
           <label>
@@ -78,50 +79,50 @@
             <input id="hInput" type="number" min="0.20" max="1.40" step="0.01" />
           </label>
           <label>
-            <span>Product preset</span>
+            <span>상품 프리셋</span>
             <select id="productPreset">
-              <option value="1">Mini futures x1</option>
-              <option value="10">Stock futures x10</option>
+              <option value="10">주식선물 x10</option>
+              <option value="1">미니선물 x1</option>
             </select>
           </label>
           <label>
-            <span>Contract multiplier</span>
+            <span>계약 승수</span>
             <input id="contractMultiplier" type="number" min="1" step="1" />
           </label>
           <label>
-            <span>Samsung contracts</span>
+            <span>삼성전자 계약 수</span>
             <input id="samsungContracts" type="number" min="0" step="1" />
           </label>
           <label>
-            <span>Account capital</span>
+            <span>계좌 기준금액</span>
             <input id="accountCapital" type="number" min="0" step="1000000" />
           </label>
           <label>
-            <span>Samsung expected price</span>
+            <span>삼성전자 예상가</span>
             <input id="samsungExpected" type="number" min="0" step="500" />
           </label>
           <label>
-            <span>SK Hynix expected price</span>
+            <span>SK하이닉스 예상가</span>
             <input id="hynixExpected" type="number" min="0" step="500" />
           </label>
           <label>
-            <span>Margin buffer multiple</span>
+            <span>증거금 버퍼 배수</span>
             <input id="bufferMultiple" type="number" min="1" max="5" step="0.25" />
           </label>
           <label>
-            <span>Samsung margin rate</span>
+            <span>삼성전자 증거금률</span>
             <input id="samsungMarginRate" type="number" min="0" max="1" step="0.001" />
           </label>
           <label>
-            <span>SK Hynix margin rate</span>
+            <span>SK하이닉스 증거금률</span>
             <input id="hynixMarginRate" type="number" min="0" max="1" step="0.001" />
           </label>
           <label>
-            <span>Fee rate, one way bps</span>
+            <span>수수료, 편도 bps</span>
             <input id="feeBps" type="number" min="0" step="0.1" />
           </label>
           <label>
-            <span>Slippage, one way bps</span>
+            <span>슬리피지, 편도 bps</span>
             <input id="slippageBps" type="number" min="0" step="0.1" />
           </label>
         </div>
@@ -130,15 +131,15 @@
       <section class="table-grid">
         <article class="panel">
           <div class="section-head">
-            <h2>Position</h2>
-            <span class="muted">mini-futures contract based</span>
+            <h2 class="title-line">포지션 <span class="help" tabindex="0" title="현재 입력값으로 구성되는 삼성전자 롱과 SK하이닉스 숏 계약 수와 명목금액입니다.">?</span></h2>
+            <span class="muted">주식선물 계약 기준</span>
           </div>
           <dl id="positionDetails" class="detail-list"></dl>
         </article>
         <article class="panel">
           <div class="section-head">
-            <h2>Expected Price Result</h2>
-            <span class="muted">current to forecast</span>
+            <h2 class="title-line">예상가 손익 <span class="help" tabindex="0" title="현재가에서 사용자가 입력한 예상가까지 이동할 때의 각 레그 손익입니다.">?</span></h2>
+            <span class="muted">현재가에서 예상가까지</span>
           </div>
           <dl id="forecastDetails" class="detail-list"></dl>
         </article>
@@ -147,15 +148,15 @@
       <section class="chart-grid">
         <article class="chart-panel">
           <div class="section-head">
-            <h2>2Y Backtest</h2>
-            <span class="muted">fixed h vs rolling beta h</span>
+            <h2 class="title-line">2년 백테스트 <span class="help" tabindex="0" title="고정 h 전략과 rolling beta h 전략의 계좌 수익률 경로를 비교합니다.">?</span></h2>
+            <span class="muted">고정 h vs rolling beta h</span>
           </div>
           <canvas id="backtestChart"></canvas>
         </article>
         <article class="chart-panel">
           <div class="section-head">
-            <h2>h Sensitivity</h2>
-            <span class="muted">final return and max drawdown</span>
+            <h2 class="title-line">h 민감도 <span class="help" tabindex="0" title="h를 바꾸었을 때 최종 수익률과 최대낙폭이 어떻게 바뀌는지 보여줍니다.">?</span></h2>
+            <span class="muted">최종 수익률과 최대낙폭</span>
           </div>
           <canvas id="sensitivityChart"></canvas>
         </article>
@@ -164,22 +165,22 @@
       <section class="table-grid">
         <article class="panel">
           <div class="section-head">
-            <h2>Backtest Metrics</h2>
-            <span class="muted">2Y period</span>
+            <h2 class="title-line">백테스트 지표 <span class="help" tabindex="0" title="고정 h와 rolling beta 전략의 수익률, 최대낙폭, 변동성을 비교합니다.">?</span></h2>
+            <span class="muted">2년 기간</span>
           </div>
           <dl id="backtestMetrics" class="detail-list"></dl>
         </article>
         <article class="panel">
           <div class="section-head">
-            <h2>Rolling Beta Strategy</h2>
-            <span class="muted">60D regression hedge</span>
+            <h2 class="title-line">Rolling 베타 전략 <span class="help" tabindex="0" title="60일 회귀 베타로 매일 SK하이닉스 숏 계약 수를 조정하는 전략입니다.">?</span></h2>
+            <span class="muted">60일 회귀 헤지</span>
           </div>
           <dl id="rollingBetaDetails" class="detail-list"></dl>
         </article>
         <article class="panel scenario-panel">
           <div class="section-head">
-            <h2>Scenario Matrix</h2>
-            <span class="muted">PnL / account capital</span>
+            <h2 class="title-line">시나리오 매트릭스 <span class="help" tabindex="0" title="삼성전자와 SK하이닉스가 각각 -20%부터 +20%까지 움직일 때의 포지션 손익입니다.">?</span></h2>
+            <span class="muted">손익 / 계좌 기준금액</span>
           </div>
           <div class="table-scroll">
             <table>
@@ -192,20 +193,20 @@
 
       <section class="panel scenario-panel">
         <div class="section-head">
-          <h2>h Strategy Contract Table</h2>
-          <span class="muted">same Samsung contracts, current price based</span>
+          <h2 class="title-line">h별 계약 테이블 <span class="help" tabindex="0" title="동일한 삼성전자 계약 수에서 목표 h별 SK하이닉스 계약 수, 실제 h, 필요 증거금, 비용을 비교합니다.">?</span></h2>
+          <span class="muted">동일 삼성 계약 수, 현재가 기준</span>
         </div>
         <div class="table-scroll">
           <table>
             <thead>
               <tr>
-                <th>Target h</th>
-                <th>Samsung C</th>
-                <th>SK Hynix C</th>
-                <th>Actual h</th>
-                <th>Gross Notional</th>
-                <th>Required Margin</th>
-                <th>Round-trip Cost</th>
+                <th>목표 h</th>
+                <th>삼성 계약</th>
+                <th>SK 계약</th>
+                <th>실제 h</th>
+                <th>총 명목금액</th>
+                <th>필요 증거금</th>
+                <th>왕복 비용</th>
               </tr>
             </thead>
             <tbody id="hStrategyRows"></tbody>

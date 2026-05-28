@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="color-scheme" content="light" />
-    <title>SHLS Research Inputs</title>
+    <title>SHLS 리서치 입력</title>
     <link rel="stylesheet" href="assets/styles.css" />
     <script defer src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
     <script defer src="assets/research.js"></script>
@@ -12,13 +12,14 @@
   <body>
     <header class="topbar">
       <div>
-        <h1>SHLS Research Inputs</h1>
-        <p>target price, earnings trend, key articles, and global memory factors</p>
+        <h1>SHLS 리서치 입력</h1>
+        <p>목표가, 실적 추이, 주요 기사, 글로벌 메모리 요소</p>
       </div>
       <div class="status-strip">
-        <a class="nav-link" href="index.html">Dashboard</a>
-        <a class="nav-link" href="base.html">Base</a>
-        <a class="nav-link" href="simulator.html">Simulator</a>
+        <a class="nav-link" href="index.html">대시보드</a>
+        <a class="nav-link" href="base.html">기초자료</a>
+        <a class="nav-link" href="simulator.html">시뮬레이터</a>
+        <a class="nav-link" href="backtest.html">백테스트</a>
         <span id="researchGeneratedAt" class="muted">-</span>
       </div>
     </header>
@@ -29,15 +30,15 @@
       <section class="chart-grid">
         <article class="chart-panel">
           <div class="section-head">
-            <h2>Target Price Upside</h2>
-            <span class="muted">manual/seeded consensus rows</span>
+            <h2 class="title-line">목표가 업사이드 <span class="help" tabindex="0" title="현재가 대비 각 출처의 목표가 상승여력을 비교합니다.">?</span></h2>
+            <span class="muted">수동/시드 컨센서스</span>
           </div>
           <canvas id="targetChart"></canvas>
         </article>
         <article class="chart-panel">
           <div class="section-head">
-            <h2>Operating Profit Trend</h2>
-            <span class="muted">actual and estimate, KRW trillion</span>
+            <h2 class="title-line">영업이익 추이 <span class="help" tabindex="0" title="실제 실적과 추정치를 기간별로 비교합니다. 단위는 조원입니다.">?</span></h2>
+            <span class="muted">실적/추정, 조원</span>
           </div>
           <canvas id="earningsChart"></canvas>
         </article>
@@ -46,18 +47,18 @@
       <section class="table-grid">
         <article class="panel">
           <div class="section-head">
-            <h2>Target Prices</h2>
-            <span class="muted">source-linked rows</span>
+            <h2 class="title-line">목표가 <span class="help" tabindex="0" title="출처별 목표가, 기준 현재가 대비 업사이드를 확인합니다.">?</span></h2>
+            <span class="muted">출처 링크 포함</span>
           </div>
           <div class="table-scroll">
             <table>
               <thead>
                 <tr>
-                  <th>Date</th>
-                  <th>Company</th>
-                  <th>Source</th>
-                  <th>Target</th>
-                  <th>Upside</th>
+                  <th>날짜</th>
+                  <th>종목</th>
+                  <th>출처</th>
+                  <th>목표가</th>
+                  <th>업사이드</th>
                 </tr>
               </thead>
               <tbody id="targetRows"></tbody>
@@ -66,19 +67,19 @@
         </article>
         <article class="panel">
           <div class="section-head">
-            <h2>Earnings Trend</h2>
-            <span class="muted">actual/estimate</span>
+            <h2 class="title-line">실적 추이 <span class="help" tabindex="0" title="매출, 영업이익, 영업이익률의 실제/추정 데이터를 비교합니다.">?</span></h2>
+            <span class="muted">실적/추정</span>
           </div>
           <div class="table-scroll">
             <table>
               <thead>
                 <tr>
-                  <th>Period</th>
-                  <th>Type</th>
-                  <th>Company</th>
-                  <th>Revenue</th>
-                  <th>OP</th>
-                  <th>Margin</th>
+                  <th>기간</th>
+                  <th>구분</th>
+                  <th>종목</th>
+                  <th>매출</th>
+                  <th>영업이익</th>
+                  <th>마진</th>
                 </tr>
               </thead>
               <tbody id="earningsRows"></tbody>
@@ -90,26 +91,26 @@
       <section class="table-grid">
         <article class="panel">
           <div class="section-head">
-            <h2>Major Articles</h2>
-            <span class="muted">direction is Samsung long / Hynix short view</span>
+            <h2 class="title-line">주요 기사 <span class="help" tabindex="0" title="전략 관점에서 기사 방향성을 +1, 0, -1로 기록합니다. +는 삼성전자 롱/SK하이닉스 숏에 우호적입니다.">?</span></h2>
+            <span class="muted">방향성은 삼성 롱 / 하이닉스 숏 기준</span>
           </div>
           <div class="article-list" id="articleRows"></div>
         </article>
         <article class="panel">
           <div class="section-head">
-            <h2>Global Memory Factors</h2>
-            <span class="muted">HBM bit growth, validation, supply/demand</span>
+            <h2 class="title-line">글로벌 메모리 요소 <span class="help" tabindex="0" title="HBM bit growth, validation, 공급/수요 등 글로벌 변수를 정리합니다.">?</span></h2>
+            <span class="muted">HBM bit growth, validation, 공급/수요</span>
           </div>
           <div class="table-scroll">
             <table>
               <thead>
                 <tr>
-                  <th>Date</th>
-                  <th>Category</th>
-                  <th>Company</th>
-                  <th>Metric</th>
-                  <th>Value</th>
-                  <th>Dir</th>
+                  <th>날짜</th>
+                  <th>분류</th>
+                  <th>대상</th>
+                  <th>지표</th>
+                  <th>값</th>
+                  <th>방향</th>
                 </tr>
               </thead>
               <tbody id="globalRows"></tbody>

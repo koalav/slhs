@@ -23,10 +23,9 @@ const simFmt = {
   krw(value) {
     if (!Number.isFinite(value)) return "-";
     const abs = Math.abs(value);
-    if (abs >= 1_000_000_000) return `${simFmt.num(value / 1_000_000_000, 1)}B KRW`;
-    if (abs >= 1_000_000) return `${simFmt.num(value / 1_000_000, 1)}M KRW`;
-    if (abs >= 1_000) return `${simFmt.num(value / 1_000, 1)}K KRW`;
-    return `${Math.round(value).toLocaleString("ko-KR")} KRW`;
+    if (abs >= 100_000_000) return `${simFmt.num(value / 100_000_000, 1)}억원`;
+    if (abs >= 10_000) return `${simFmt.num(value / 10_000, 1)}만원`;
+    return `${Math.round(value).toLocaleString("ko-KR")}원`;
   },
   price(value) {
     if (!Number.isFinite(value)) return "-";
@@ -101,18 +100,28 @@ function setHValue(value) {
   s("hInput").value = h.toFixed(2);
 }
 
+function hModeLabel(value) {
+  const labels = {
+    signal: "시그널 h",
+    beta: "60일 rolling 베타",
+    vol: "60일 변동성 h",
+    manual: "수동 h",
+  };
+  return labels[value] || value;
+}
+
 function defaultControls() {
   const prices = currentPrices();
   const position = sim.latest.signals.position_1h;
   const h = Number(position.actual_hedge_h || 0.66);
-  const miniMultiplier = 1;
-  const standardSamsungContracts = Number(position.samsung_contracts || 11);
+  const stockFuturesMultiplier = Number(position.futures_multiplier || 10);
+  const stockFuturesSamsungContracts = Number(position.samsung_contracts || 11);
 
   s("hMode").value = "signal";
-  s("productPreset").value = String(miniMultiplier);
-  s("contractMultiplier").value = miniMultiplier;
+  s("productPreset").value = String(stockFuturesMultiplier);
+  s("contractMultiplier").value = stockFuturesMultiplier;
   setHValue(h);
-  s("samsungContracts").value = standardSamsungContracts * 10;
+  s("samsungContracts").value = stockFuturesSamsungContracts;
   s("accountCapital").value = 100_000_000;
   s("samsungExpected").value = Math.round(prices.samsung);
   s("hynixExpected").value = Math.round(prices.hynix);
@@ -310,55 +319,55 @@ function renderTop(c, position, forward, margin) {
   s("expectedPnl").textContent = simFmt.krw(forward.netPnl);
   s("expectedPnl").classList.toggle("pos", forward.netPnl > 0);
   s("expectedPnl").classList.toggle("neg", forward.netPnl < 0);
-  s("expectedRoi").textContent = `${simFmt.pct(forward.netPnl / c.capital)} of account, net`;
+  s("expectedRoi").textContent = `계좌 대비 ${simFmt.pct(forward.netPnl / c.capital)}, 순손익`;
   s("requiredMargin").textContent = simFmt.krw(margin.required);
   s("recommendedMargin").textContent = simFmt.krw(margin.recommended);
-  s("marginRateText").textContent = `${simFmt.pct(margin.required / c.capital)} of account`;
-  s("marginBufferText").textContent = `${simFmt.num(c.bufferMultiple, 2)}x + entry cost`;
+  s("marginRateText").textContent = `계좌 대비 ${simFmt.pct(margin.required / c.capital)}`;
+  s("marginBufferText").textContent = `${simFmt.num(c.bufferMultiple, 2)}배 + 진입 비용`;
 }
 
 function renderDetails(c, position, forward, margin, bt, rollingBt) {
   s("positionDetails").innerHTML = [
-    ["Contract multiplier", `${c.multiplier}`],
-    ["Samsung contracts", `${c.samsungContracts}`],
-    ["SK Hynix contracts", `${position.hynixContracts}`],
-    ["h source", c.hMode],
-    ["Target h / actual h", `${simFmt.num(c.h, 3)} / ${simFmt.num(position.actualH, 3)}`],
-    ["h rounding error", simFmt.pct(position.actualH - c.h)],
-    ["Samsung long notional", simFmt.krw(position.samsungExposure)],
-    ["SK Hynix short notional", simFmt.krw(position.hynixExposure)],
-    ["Gross notional", simFmt.krw(position.grossNotional)],
-    ["Required margin", simFmt.krw(margin.required)],
-    ["Entry cost estimate", simFmt.krw(forward.entryCost)],
+    ["계약 승수", `${c.multiplier}`],
+    ["삼성전자 계약 수", `${c.samsungContracts}`],
+    ["SK하이닉스 계약 수", `${position.hynixContracts}`],
+    ["h 기준", hModeLabel(c.hMode)],
+    ["목표 h / 실제 h", `${simFmt.num(c.h, 3)} / ${simFmt.num(position.actualH, 3)}`],
+    ["h 반올림 오차", simFmt.pct(position.actualH - c.h)],
+    ["삼성전자 롱 명목금액", simFmt.krw(position.samsungExposure)],
+    ["SK하이닉스 숏 명목금액", simFmt.krw(position.hynixExposure)],
+    ["총 명목금액", simFmt.krw(position.grossNotional)],
+    ["필요 증거금", simFmt.krw(margin.required)],
+    ["진입 비용 추정", simFmt.krw(forward.entryCost)],
   ]
     .map(([k, v]) => `<dt>${k}</dt><dd>${v}</dd>`)
     .join("");
 
   s("forecastDetails").innerHTML = [
-    ["Samsung expected return", simFmt.pct(forward.samsungReturn)],
-    ["SK Hynix expected return", simFmt.pct(forward.hynixReturn)],
-    ["Samsung leg PnL", simFmt.krw(forward.samsungPnl)],
-    ["SK Hynix leg PnL", simFmt.krw(forward.hynixPnl)],
-    ["Gross PnL", simFmt.krw(forward.grossPnl)],
-    ["Entry cost", simFmt.krw(forward.entryCost)],
-    ["Exit cost", simFmt.krw(forward.exitCost)],
-    ["Round-trip cost", simFmt.krw(forward.roundTripCost)],
-    ["Net PnL", simFmt.krw(forward.netPnl)],
-    ["Net account ROI", simFmt.pct(forward.netPnl / c.capital)],
+    ["삼성전자 예상 수익률", simFmt.pct(forward.samsungReturn)],
+    ["SK하이닉스 예상 수익률", simFmt.pct(forward.hynixReturn)],
+    ["삼성전자 레그 손익", simFmt.krw(forward.samsungPnl)],
+    ["SK하이닉스 레그 손익", simFmt.krw(forward.hynixPnl)],
+    ["총 손익", simFmt.krw(forward.grossPnl)],
+    ["진입 비용", simFmt.krw(forward.entryCost)],
+    ["청산 비용", simFmt.krw(forward.exitCost)],
+    ["왕복 비용", simFmt.krw(forward.roundTripCost)],
+    ["순손익", simFmt.krw(forward.netPnl)],
+    ["순손익 계좌 수익률", simFmt.pct(forward.netPnl / c.capital)],
   ]
     .map(([k, v]) => `<dt>${k}</dt><dd>${v}</dd>`)
     .join("");
 
   s("backtestMetrics").innerHTML = [
-    ["Fixed h return", simFmt.pct(bt.totalReturn)],
-    ["Fixed h max drawdown", simFmt.pct(bt.mdd)],
-    ["Fixed h annualized vol", simFmt.pct(bt.vol)],
-    ["Rolling beta return", simFmt.pct(rollingBt.totalReturn)],
-    ["Rolling beta max drawdown", simFmt.pct(rollingBt.mdd)],
-    ["Rolling beta annualized vol", simFmt.pct(rollingBt.vol)],
-    ["Start equity", simFmt.krw(c.capital)],
-    ["End equity", simFmt.krw(bt.equity[bt.equity.length - 1])],
-    ["Gross notional / account", simFmt.pct(position.grossNotional / c.capital)],
+    ["고정 h 수익률", simFmt.pct(bt.totalReturn)],
+    ["고정 h 최대낙폭", simFmt.pct(bt.mdd)],
+    ["고정 h 연율 변동성", simFmt.pct(bt.vol)],
+    ["Rolling 베타 수익률", simFmt.pct(rollingBt.totalReturn)],
+    ["Rolling 베타 최대낙폭", simFmt.pct(rollingBt.mdd)],
+    ["Rolling 베타 연율 변동성", simFmt.pct(rollingBt.vol)],
+    ["시작 계좌금액", simFmt.krw(c.capital)],
+    ["종료 계좌금액", simFmt.krw(bt.equity[bt.equity.length - 1])],
+    ["총 명목금액 / 계좌금액", simFmt.pct(position.grossNotional / c.capital)],
   ]
     .map(([k, v]) => `<dt>${k}</dt><dd>${v}</dd>`)
     .join("");
@@ -367,20 +376,21 @@ function renderDetails(c, position, forward, margin, bt, rollingBt) {
 function renderRollingBetaDetails(c, rollingBt) {
   const refs = hReferenceValues();
   s("rollingBetaDetails").innerHTML = [
-    ["Signal h", simFmt.num(refs.signal, 3)],
-    ["60D Samsung-on-Hynix beta", simFmt.num(refs.beta, 3)],
-    ["60D SK-on-Samsung beta", simFmt.num(refs.reverseBeta, 3)],
-    ["60D volatility h", simFmt.num(refs.vol, 3)],
-    ["Selected h", `${c.hMode} / ${simFmt.num(c.h, 3)}`],
-    ["Rolling beta SK contracts", `${rollingBt.latestPosition.hynixContracts}`],
-    ["Rolling beta actual h", simFmt.num(rollingBt.latestPosition.actualH, 3)],
-    ["2Y rebalance cost", simFmt.krw(rollingBt.totalRebalanceCost)],
+    ["시그널 h", simFmt.num(refs.signal, 3)],
+    ["60일 삼성-on-하이닉스 베타", simFmt.num(refs.beta, 3)],
+    ["60일 하이닉스-on-삼성 베타", simFmt.num(refs.reverseBeta, 3)],
+    ["60일 변동성 h", simFmt.num(refs.vol, 3)],
+    ["선택 h", `${hModeLabel(c.hMode)} / ${simFmt.num(c.h, 3)}`],
+    ["Rolling 베타 SK 계약 수", `${rollingBt.latestPosition.hynixContracts}`],
+    ["Rolling 베타 실제 h", simFmt.num(rollingBt.latestPosition.actualH, 3)],
+    ["2년 리밸런싱 비용", simFmt.krw(rollingBt.totalRebalanceCost)],
   ]
     .map(([k, v]) => `<dt>${k}</dt><dd>${v}</dd>`)
     .join("");
 }
 
 function renderCharts(c, bt, rollingBt) {
+  if (window.Chart) Chart.defaults.font.family = getComputedStyle(document.body).fontFamily;
   if (simCharts.backtest) simCharts.backtest.destroy();
   if (simCharts.sensitivity) simCharts.sensitivity.destroy();
 
@@ -390,7 +400,7 @@ function renderCharts(c, bt, rollingBt) {
       labels: bt.dates,
       datasets: [
         {
-          label: "Equity",
+          label: "계좌 수익률",
           data: bt.equity.map((value) => (value / c.capital - 1) * 100),
           borderColor: "#2764c5",
           pointRadius: 0,
@@ -398,7 +408,7 @@ function renderCharts(c, bt, rollingBt) {
           yAxisID: "ret",
         },
         {
-          label: "Rolling beta equity",
+          label: "Rolling 베타 계좌 수익률",
           data: rollingBt.equity.map((value) => (value / c.capital - 1) * 100),
           borderColor: "#11845b",
           pointRadius: 0,
@@ -406,7 +416,7 @@ function renderCharts(c, bt, rollingBt) {
           yAxisID: "ret",
         },
         {
-          label: "Drawdown",
+          label: "낙폭",
           data: bt.drawdown.map((value) => value * 100),
           borderColor: "#c23b31",
           pointRadius: 0,
@@ -436,14 +446,14 @@ function renderCharts(c, bt, rollingBt) {
       labels: hValues,
       datasets: [
         {
-          label: "Final return",
+          label: "최종 수익률",
           data: returns,
           borderColor: "#11845b",
           pointRadius: 0,
           borderWidth: 1.8,
         },
         {
-          label: "Max drawdown",
+          label: "최대낙폭",
           data: drawdowns,
           borderColor: "#c23b31",
           pointRadius: 0,
@@ -489,7 +499,7 @@ function simChartOptions(unit, customScales = null) {
 function renderScenario(c, position) {
   const rows = [-0.2, -0.1, 0, 0.1, 0.2];
   const cols = [-0.2, -0.1, 0, 0.1, 0.2];
-  s("scenarioHead").innerHTML = `<tr><th>S \\ H</th>${cols
+  s("scenarioHead").innerHTML = `<tr><th>삼성 \\ SK</th>${cols
     .map((col) => `<th>${simFmt.pct(col, 0)}</th>`)
     .join("")}</tr>`;
   s("scenarioBody").innerHTML = rows
@@ -546,10 +556,11 @@ function recalc() {
 
 async function initSimulator() {
   const [latest, base] = await Promise.all([fetchJson("data/latest.json"), fetchJson("data/base.json")]);
+  if (document.fonts?.ready) await document.fonts.ready;
   sim.latest = latest;
   sim.base = base;
   s("simGeneratedAt").textContent = new Date(latest.generated_at).toLocaleString("ko-KR");
-  s("simPeriod").textContent = `${base.period.start} - ${base.period.end}, ${base.period.observations} sessions`;
+  s("simPeriod").textContent = `${base.period.start} - ${base.period.end}, ${base.period.observations} 거래일`;
   defaultControls();
   s("hRange").addEventListener("input", () => syncH(true));
   s("hInput").addEventListener("input", () => syncH(false));
@@ -576,6 +587,6 @@ async function initSimulator() {
 window.addEventListener("DOMContentLoaded", () => {
   initSimulator().catch((error) => {
     console.error(error);
-    s("simGeneratedAt").textContent = "load failed";
+    s("simGeneratedAt").textContent = "로드 실패";
   });
 });
