@@ -1,0 +1,9 @@
+[project]
+name = "shls"
+version = "0.1.0"
+description = "Samsung Electronics / SK Hynix long-short timing dashboard"
+requires-python = ">=3.10"
+dependencies = []
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]

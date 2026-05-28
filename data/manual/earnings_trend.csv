@@ -1,0 +1,11 @@
+period,period_type,company,revenue_krw_t,operating_profit_krw_t,net_profit_krw_t,op_margin_pct,source,note,source_url
+2026Q1,actual,Samsung Electronics,133.9,57.2,,42.7,Samsung Newsroom,Official Q1 2026 result; DS operating profit cited in shared note at 53.7T.,https://news.samsung.com/nl/samsung-electronics-announces-first-quarter-2026-results
+2026Q1,actual,SK Hynix,52.5763,37.6103,40.3459,72.0,SK Hynix PRNewswire,Official Q1 2026 result; AI/HBM high-value product sales drove performance.,https://www.prnewswire.com/news-releases/sk-hynix-announces-1q26-financial-results-302750959.html
+2026FY,estimate,Samsung Electronics,,338,,,SK Securities via shared note,2026 operating profit estimate from shared strategy note.,https://chatgpt.com/share/6a17bbc2-52a0-83a4-b4d4-55d948a33a5d
+2026FY,estimate,SK Hynix,,262,,,SK Securities via shared note,2026 operating profit estimate from shared strategy note.,https://chatgpt.com/share/6a17bbc2-52a0-83a4-b4d4-55d948a33a5d
+2027FY,estimate,Samsung Electronics,,494,,,SK Securities via shared note,2027 operating profit estimate from shared strategy note.,https://chatgpt.com/share/6a17bbc2-52a0-83a4-b4d4-55d948a33a5d
+2027FY,estimate,SK Hynix,,376,,,SK Securities via shared note,2027 operating profit estimate from shared strategy note.,https://chatgpt.com/share/6a17bbc2-52a0-83a4-b4d4-55d948a33a5d
+2026FY,estimate,Samsung Electronics,,371,,,Mirae Asset via shared note,2026 operating profit estimate from shared strategy note.,https://chatgpt.com/share/6a17bbc2-52a0-83a4-b4d4-55d948a33a5d
+2026FY,estimate,SK Hynix,,290,,,Mirae Asset via shared note,2026 operating profit estimate from shared strategy note.,https://chatgpt.com/share/6a17bbc2-52a0-83a4-b4d4-55d948a33a5d
+2027FY,estimate,Samsung Electronics,,500,,,Mirae Asset via shared note,2027 operating profit estimate from shared strategy note.,https://chatgpt.com/share/6a17bbc2-52a0-83a4-b4d4-55d948a33a5d
+2027FY,estimate,SK Hynix,,420,,,Mirae Asset via shared note,2027 operating profit estimate from shared strategy note.,https://chatgpt.com/share/6a17bbc2-52a0-83a4-b4d4-55d948a33a5d

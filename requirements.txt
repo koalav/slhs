@@ -1,0 +1,4 @@
+# The core collector uses only the Python standard library.
+#
+# Optional data enrichments:
+# pykrx==1.0.51   # KRX/Naver daily data, investor flow, fundamentals

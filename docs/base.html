@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light" />
+    <title>SHLS Base Materials</title>
+    <link rel="stylesheet" href="assets/styles.css" />
+    <script defer src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+    <script defer src="assets/base.js"></script>
+  </head>
+  <body>
+    <header class="topbar">
+      <div>
+        <h1>SHLS Base Materials</h1>
+        <p>2Y price, spread, beta, correlation, volatility, and market-cap ratio</p>
+      </div>
+      <div class="status-strip">
+        <a class="nav-link" href="index.html">Dashboard</a>
+        <a class="nav-link" href="research.html">Research</a>
+        <a class="nav-link" href="simulator.html">Simulator</a>
+        <span id="baseGeneratedAt" class="muted">-</span>
+      </div>
+    </header>
+
+    <main>
+      <section class="summary-grid base-summary">
+        <article class="metric-card">
+          <span>Period</span>
+          <strong id="periodText">-</strong>
+          <small id="observationText">-</small>
+        </article>
+        <article class="metric-card">
+          <span>Samsung 2Y</span>
+          <strong id="samsung2y">-</strong>
+          <small id="samsungClose">-</small>
+        </article>
+        <article class="metric-card">
+          <span>SK Hynix 2Y</span>
+          <strong id="skhynix2y">-</strong>
+          <small id="skhynixClose">-</small>
+        </article>
+        <article class="metric-card">
+          <span>Spread Z 60D</span>
+          <strong id="baseSpreadZ">-</strong>
+          <small>h = 0.66 weighted spread</small>
+        </article>
+        <article class="metric-card">
+          <span>Beta 60D</span>
+          <strong id="baseBeta">-</strong>
+          <small>Samsung on SK Hynix</small>
+        </article>
+        <article class="metric-card">
+          <span>Correlation 60D</span>
+          <strong id="baseCorr">-</strong>
+          <small id="baseVolHedge">-</small>
+        </article>
+      </section>
+
+      <section class="chart-grid">
+        <article class="chart-panel">
+          <div class="section-head">
+            <h2>Raw Price</h2>
+            <span class="muted">separate axes</span>
+          </div>
+          <canvas id="rawPriceChart"></canvas>
+        </article>
+        <article class="chart-panel">
+          <div class="section-head">
+            <h2>Normalized Return</h2>
+            <span class="muted">start = 0%</span>
+          </div>
+          <canvas id="normalizedChart"></canvas>
+        </article>
+      </section>
+
+      <section class="chart-grid">
+        <article class="chart-panel">
+          <div class="section-head">
+            <h2>Weighted Spread</h2>
+            <span class="muted">spread and 60D z-score</span>
+          </div>
+          <canvas id="baseSpreadChart"></canvas>
+        </article>
+        <article class="chart-panel">
+          <div class="section-head">
+            <h2>60D Beta</h2>
+            <span class="muted">rolling regression beta</span>
+          </div>
+          <canvas id="betaChart"></canvas>
+        </article>
+      </section>
+
+      <section class="chart-grid">
+        <article class="chart-panel">
+          <div class="section-head">
+            <h2>60D Correlation & Volatility</h2>
+            <span class="muted">annualized vol</span>
+          </div>
+          <canvas id="riskChart"></canvas>
+        </article>
+        <article class="chart-panel">
+          <div class="section-head">
+            <h2>Market Cap Ratio</h2>
+            <span class="muted">SK Hynix / Samsung</span>
+          </div>
+          <canvas id="mcapChart"></canvas>
+        </article>
+      </section>
+
+      <section class="panel prose-panel">
+        <h2>Definitions</h2>
+        <dl class="detail-list definitions" id="definitionList"></dl>
+      </section>
+    </main>
+  </body>
+</html>

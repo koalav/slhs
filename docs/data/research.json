@@ -1,0 +1,350 @@
+{
+  "coverage": [
+    {
+      "available": true,
+      "key": "expected_target_price",
+      "label": "Target price",
+      "rows": 6
+    },
+    {
+      "available": true,
+      "key": "earnings_trend",
+      "label": "Earnings trend",
+      "rows": 10
+    },
+    {
+      "available": true,
+      "key": "major_articles",
+      "label": "Major articles",
+      "rows": 5
+    },
+    {
+      "available": true,
+      "key": "global_memory_factors",
+      "label": "Memory/global factors",
+      "rows": 5
+    }
+  ],
+  "earnings_trend": [
+    {
+      "company": "Samsung Electronics",
+      "net_profit_krw_t": null,
+      "note": "Official Q1 2026 result; DS operating profit cited in shared note at 53.7T.",
+      "op_margin_pct": 42.7,
+      "operating_profit_krw_t": 57.2,
+      "period": "2026Q1",
+      "period_type": "actual",
+      "revenue_krw_t": 133.9,
+      "source": "Samsung Newsroom",
+      "source_url": "https://news.samsung.com/nl/samsung-electronics-announces-first-quarter-2026-results"
+    },
+    {
+      "company": "SK Hynix",
+      "net_profit_krw_t": 40.3459,
+      "note": "Official Q1 2026 result; AI/HBM high-value product sales drove performance.",
+      "op_margin_pct": 72.0,
+      "operating_profit_krw_t": 37.6103,
+      "period": "2026Q1",
+      "period_type": "actual",
+      "revenue_krw_t": 52.5763,
+      "source": "SK Hynix PRNewswire",
+      "source_url": "https://www.prnewswire.com/news-releases/sk-hynix-announces-1q26-financial-results-302750959.html"
+    },
+    {
+      "company": "Samsung Electronics",
+      "net_profit_krw_t": null,
+      "note": "2026 operating profit estimate from shared strategy note.",
+      "op_margin_pct": null,
+      "operating_profit_krw_t": 338.0,
+      "period": "2026FY",
+      "period_type": "estimate",
+      "revenue_krw_t": null,
+      "source": "SK Securities via shared note",
+      "source_url": "https://chatgpt.com/share/6a17bbc2-52a0-83a4-b4d4-55d948a33a5d"
+    },
+    {
+      "company": "SK Hynix",
+      "net_profit_krw_t": null,
+      "note": "2026 operating profit estimate from shared strategy note.",
+      "op_margin_pct": null,
+      "operating_profit_krw_t": 262.0,
+      "period": "2026FY",
+      "period_type": "estimate",
+      "revenue_krw_t": null,
+      "source": "SK Securities via shared note",
+      "source_url": "https://chatgpt.com/share/6a17bbc2-52a0-83a4-b4d4-55d948a33a5d"
+    },
+    {
+      "company": "Samsung Electronics",
+      "net_profit_krw_t": null,
+      "note": "2027 operating profit estimate from shared strategy note.",
+      "op_margin_pct": null,
+      "operating_profit_krw_t": 494.0,
+      "period": "2027FY",
+      "period_type": "estimate",
+      "revenue_krw_t": null,
+      "source": "SK Securities via shared note",
+      "source_url": "https://chatgpt.com/share/6a17bbc2-52a0-83a4-b4d4-55d948a33a5d"
+    },
+    {
+      "company": "SK Hynix",
+      "net_profit_krw_t": null,
+      "note": "2027 operating profit estimate from shared strategy note.",
+      "op_margin_pct": null,
+      "operating_profit_krw_t": 376.0,
+      "period": "2027FY",
+      "period_type": "estimate",
+      "revenue_krw_t": null,
+      "source": "SK Securities via shared note",
+      "source_url": "https://chatgpt.com/share/6a17bbc2-52a0-83a4-b4d4-55d948a33a5d"
+    },
+    {
+      "company": "Samsung Electronics",
+      "net_profit_krw_t": null,
+      "note": "2026 operating profit estimate from shared strategy note.",
+      "op_margin_pct": null,
+      "operating_profit_krw_t": 371.0,
+      "period": "2026FY",
+      "period_type": "estimate",
+      "revenue_krw_t": null,
+      "source": "Mirae Asset via shared note",
+      "source_url": "https://chatgpt.com/share/6a17bbc2-52a0-83a4-b4d4-55d948a33a5d"
+    },
+    {
+      "company": "SK Hynix",
+      "net_profit_krw_t": null,
+      "note": "2026 operating profit estimate from shared strategy note.",
+      "op_margin_pct": null,
+      "operating_profit_krw_t": 290.0,
+      "period": "2026FY",
+      "period_type": "estimate",
+      "revenue_krw_t": null,
+      "source": "Mirae Asset via shared note",
+      "source_url": "https://chatgpt.com/share/6a17bbc2-52a0-83a4-b4d4-55d948a33a5d"
+    },
+    {
+      "company": "Samsung Electronics",
+      "net_profit_krw_t": null,
+      "note": "2027 operating profit estimate from shared strategy note.",
+      "op_margin_pct": null,
+      "operating_profit_krw_t": 500.0,
+      "period": "2027FY",
+      "period_type": "estimate",
+      "revenue_krw_t": null,
+      "source": "Mirae Asset via shared note",
+      "source_url": "https://chatgpt.com/share/6a17bbc2-52a0-83a4-b4d4-55d948a33a5d"
+    },
+    {
+      "company": "SK Hynix",
+      "net_profit_krw_t": null,
+      "note": "2027 operating profit estimate from shared strategy note.",
+      "op_margin_pct": null,
+      "operating_profit_krw_t": 420.0,
+      "period": "2027FY",
+      "period_type": "estimate",
+      "revenue_krw_t": null,
+      "source": "Mirae Asset via shared note",
+      "source_url": "https://chatgpt.com/share/6a17bbc2-52a0-83a4-b4d4-55d948a33a5d"
+    }
+  ],
+  "generated_at": "2026-05-28T05:00:06.508720+00:00",
+  "global_factors": [
+    {
+      "category": "HBM bit output",
+      "company": "SK Hynix",
+      "confidence": 4,
+      "date": "2026-03-09",
+      "direction": -1,
+      "metric": "2026 share",
+      "note": "TrendForce-cited projection: SK Hynix leads 2026 global HBM bit output but share falls from 59% in 2025.",
+      "source_url": "https://www.trendforce.com/news/2026/03/09/news-samsung-sk%E2%80%AFhynix-reportedly-tapped-as-nvidia-rubin-hbm4-suppliers-shipments-could-start-in-march/",
+      "unit": "%",
+      "value": 50.0
+    },
+    {
+      "category": "HBM bit output",
+      "company": "Samsung Electronics",
+      "confidence": 4,
+      "date": "2026-03-09",
+      "direction": 1,
+      "metric": "2026 share",
+      "note": "TrendForce-cited projection: Samsung HBM bit output share rises from 20% in 2025 to 28% in 2026.",
+      "source_url": "https://www.trendforce.com/news/2026/03/09/news-samsung-sk%E2%80%AFhynix-reportedly-tapped-as-nvidia-rubin-hbm4-suppliers-shipments-could-start-in-march/",
+      "unit": "%",
+      "value": 28.0
+    },
+    {
+      "category": "HBM4 validation",
+      "company": "Industry",
+      "confidence": 4,
+      "date": "2026-02-13",
+      "direction": 1,
+      "metric": "Expected completion",
+      "note": "TrendForce expected HBM4 validation completion in 2Q26 and multi-supplier NVIDIA sourcing.",
+      "source_url": "https://www.trendforce.com/presscenter/news/20260213-12929.html",
+      "unit": "quarter",
+      "value": "2026Q2"
+    },
+    {
+      "category": "AI memory demand",
+      "company": "SK Hynix",
+      "confidence": 5,
+      "date": "2026-04-22",
+      "direction": -1,
+      "metric": "Demand vs capacity",
+      "note": "SK Hynix emphasized customer demand exceeding supply capacity; this supports the short-leg risk flag.",
+      "source_url": "https://www.prnewswire.com/news-releases/sk-hynix-announces-1q26-financial-results-302750959.html",
+      "unit": "text",
+      "value": "exceeds capacity"
+    },
+    {
+      "category": "HBM4 supply",
+      "company": "Samsung Electronics",
+      "confidence": 4,
+      "date": "2026-04-30",
+      "direction": 1,
+      "metric": "Base-die supply",
+      "note": "Samsung Q1 result commentary includes HBM4 base-die supply as a Q2 improvement lever.",
+      "source_url": "https://news.samsung.com/nl/samsung-electronics-announces-first-quarter-2026-results",
+      "unit": "text",
+      "value": "increase expected"
+    }
+  ],
+  "major_articles": [
+    {
+      "confidence": 5,
+      "date": "2026-04-30",
+      "direction": 1,
+      "publisher": "Samsung Newsroom",
+      "source_url": "https://news.samsung.com/nl/samsung-electronics-announces-first-quarter-2026-results",
+      "summary": "Samsung reported KRW 133.9T revenue and KRW 57.2T operating profit for Q1 2026; HBM4 base-die supply is a Samsung long catalyst.",
+      "theme": "Samsung earnings/HBM4",
+      "title": "Samsung Electronics Announces First Quarter 2026 Results"
+    },
+    {
+      "confidence": 5,
+      "date": "2026-04-22",
+      "direction": -1,
+      "publisher": "SK Hynix PRNewswire",
+      "source_url": "https://www.prnewswire.com/news-releases/sk-hynix-announces-1q26-financial-results-302750959.html",
+      "summary": "SK Hynix reported KRW 52.5763T revenue and KRW 37.6103T operating profit with 72% margin; demand above capacity is a short-leg risk.",
+      "theme": "SK Hynix earnings/HBM demand",
+      "title": "SK hynix Announces 1Q26 Financial Results"
+    },
+    {
+      "confidence": 4,
+      "date": "2026-02-13",
+      "direction": 1,
+      "publisher": "TrendForce",
+      "source_url": "https://www.trendforce.com/presscenter/news/20260213-12929.html",
+      "summary": "TrendForce expected all three major memory suppliers to be in NVIDIA HBM4 supply chain, supporting Samsung catch-up but not eliminating SK leadership.",
+      "theme": "HBM4 validation/global supply",
+      "title": "HBM4 Validation Expected in 2Q26; Three Major Suppliers Poised to Shape NVIDIA Supply Landscape"
+    },
+    {
+      "confidence": 4,
+      "date": "2026-03-09",
+      "direction": 1,
+      "publisher": "TrendForce",
+      "source_url": "https://www.trendforce.com/news/2026/03/09/news-samsung-sk%E2%80%AFhynix-reportedly-tapped-as-nvidia-rubin-hbm4-suppliers-shipments-could-start-in-march/",
+      "summary": "TrendForce-cited reporting points to Samsung strength in Rubin-specific HBM4 while SK Hynix keeps broader HBM leadership.",
+      "theme": "NVIDIA Rubin/HBM4 suppliers",
+      "title": "Samsung and SK hynix Reportedly Tapped as NVIDIA Rubin HBM4 Suppliers"
+    },
+    {
+      "confidence": 4,
+      "date": "2026-02-04",
+      "direction": 0,
+      "publisher": "TrendForce",
+      "source_url": "https://www.trendforce.com/research/download/RP260204DA3",
+      "summary": "TrendForce frames 2026 as SK Hynix leadership plus Samsung recovery through HBM3e/HBM4 contributions.",
+      "theme": "HBM market structure",
+      "title": "HBM Industry Analysis - 1Q26"
+    }
+  ],
+  "notes": [
+    "Target prices and forward estimates are seed/manual data unless replaced with a licensed consensus feed.",
+    "Global factor rows are source-linked research inputs; they are not automatically updated in v1."
+  ],
+  "schema_version": 1,
+  "target_prices": [
+    {
+      "company": "Samsung Electronics",
+      "current_price_krw": 299250.0,
+      "date": "2026-05-28",
+      "note": "Seed from shared strategy note; replace with licensed consensus if available.",
+      "rating": "Strong Buy",
+      "source": "Investing consensus",
+      "source_url": "https://chatgpt.com/share/6a17bbc2-52a0-83a4-b4d4-55d948a33a5d",
+      "target_high_krw": 590000.0,
+      "target_low_krw": 205000.0,
+      "target_price_krw": 361046.0,
+      "upside_pct": 0.2065
+    },
+    {
+      "company": "SK Hynix",
+      "current_price_krw": 2241000.0,
+      "date": "2026-05-28",
+      "note": "Seed from shared strategy note; replace with licensed consensus if available.",
+      "rating": "Strong Buy",
+      "source": "Investing consensus",
+      "source_url": "https://chatgpt.com/share/6a17bbc2-52a0-83a4-b4d4-55d948a33a5d",
+      "target_high_krw": 4000000.0,
+      "target_low_krw": 1030000.0,
+      "target_price_krw": 2076603.0,
+      "upside_pct": -0.0746
+    },
+    {
+      "company": "Samsung Electronics",
+      "current_price_krw": 307000.0,
+      "date": "2026-05-27",
+      "note": "Bullish Samsung target cited in shared strategy note.",
+      "rating": "Buy",
+      "source": "Mirae Asset via shared note",
+      "source_url": "https://chatgpt.com/share/6a17bbc2-52a0-83a4-b4d4-55d948a33a5d",
+      "target_high_krw": null,
+      "target_low_krw": null,
+      "target_price_krw": 550000.0,
+      "upside_pct": 0.792
+    },
+    {
+      "company": "SK Hynix",
+      "current_price_krw": 2243000.0,
+      "date": "2026-05-27",
+      "note": "Bullish SK Hynix target cited in shared strategy note.",
+      "rating": "Buy",
+      "source": "Mirae Asset via shared note",
+      "source_url": "https://chatgpt.com/share/6a17bbc2-52a0-83a4-b4d4-55d948a33a5d",
+      "target_high_krw": null,
+      "target_low_krw": null,
+      "target_price_krw": 3800000.0,
+      "upside_pct": 0.694
+    },
+    {
+      "company": "Samsung Electronics",
+      "current_price_krw": 307000.0,
+      "date": "2026-05-07",
+      "note": "Bullish Samsung target cited in shared strategy note.",
+      "rating": "Buy",
+      "source": "SK Securities via shared note",
+      "source_url": "https://chatgpt.com/share/6a17bbc2-52a0-83a4-b4d4-55d948a33a5d",
+      "target_high_krw": null,
+      "target_low_krw": null,
+      "target_price_krw": 500000.0,
+      "upside_pct": 0.629
+    },
+    {
+      "company": "SK Hynix",
+      "current_price_krw": 2243000.0,
+      "date": "2026-05-07",
+      "note": "Bullish SK Hynix target cited in shared strategy note.",
+      "rating": "Buy",
+      "source": "SK Securities via shared note",
+      "source_url": "https://chatgpt.com/share/6a17bbc2-52a0-83a4-b4d4-55d948a33a5d",
+      "target_high_krw": null,
+      "target_low_krw": null,
+      "target_price_krw": 3000000.0,
+      "upside_pct": 0.337
+    }
+  ]
+}

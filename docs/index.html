@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light" />
+    <title>SHLS Timing Dashboard</title>
+    <link rel="stylesheet" href="assets/styles.css" />
+    <script defer src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+    <script defer src="assets/app.js"></script>
+  </head>
+  <body>
+    <header class="topbar">
+      <div>
+        <h1>SHLS Timing Dashboard</h1>
+        <p>Samsung long / SK Hynix short timing monitor</p>
+      </div>
+      <div class="status-strip">
+        <a class="nav-link" href="base.html">Base</a>
+        <a class="nav-link" href="research.html">Research</a>
+        <a class="nav-link" href="simulator.html">Simulator</a>
+        <span id="refreshState" class="pill neutral">loading</span>
+        <span id="generatedAt" class="muted">-</span>
+      </div>
+    </header>
+
+    <main>
+      <section class="summary-grid">
+        <article class="score-panel">
+          <div class="panel-label">Entry Score</div>
+          <div class="score-row">
+            <strong id="scoreValue">-</strong>
+            <span id="actionLabel" class="pill neutral">-</span>
+          </div>
+          <div class="bar">
+            <span id="scoreBar"></span>
+          </div>
+          <dl id="scoreComponents" class="component-list"></dl>
+        </article>
+
+        <article class="metric-card">
+          <span>SK/Samsung Market Cap</span>
+          <strong id="mcapRatio">-</strong>
+          <small id="mcapRatioMa">-</small>
+        </article>
+        <article class="metric-card">
+          <span>Spread Z-score</span>
+          <strong id="spreadZ">-</strong>
+          <small id="spreadRequired">-</small>
+        </article>
+        <article class="metric-card">
+          <span>1H Hedge h</span>
+          <strong id="actualHedge">-</strong>
+          <small id="grossNotional">-</small>
+        </article>
+      </section>
+
+      <section class="chart-grid">
+        <article class="chart-panel">
+          <div class="section-head">
+            <h2>Relative Price</h2>
+            <span class="muted">normalized close</span>
+          </div>
+          <canvas id="priceChart"></canvas>
+        </article>
+        <article class="chart-panel">
+          <div class="section-head">
+            <h2>Spread Timing</h2>
+            <span class="muted">weighted spread and z-score</span>
+          </div>
+          <canvas id="spreadChart"></canvas>
+        </article>
+      </section>
+
+      <section class="table-grid">
+        <article class="panel">
+          <div class="section-head">
+            <h2>Market</h2>
+            <span class="muted" id="dataSource">-</span>
+          </div>
+          <table>
+            <thead>
+              <tr>
+                <th>Asset</th>
+                <th>Price</th>
+                <th>1D</th>
+                <th>Market Cap</th>
+                <th>PBR</th>
+              </tr>
+            </thead>
+            <tbody id="marketRows"></tbody>
+          </table>
+        </article>
+
+        <article class="panel">
+          <div class="section-head">
+            <h2>Risk</h2>
+            <span class="muted" id="expiryInfo">-</span>
+          </div>
+          <table>
+            <thead>
+              <tr>
+                <th>Move</th>
+                <th>1H PnL</th>
+              </tr>
+            </thead>
+            <tbody id="stressRows"></tbody>
+          </table>
+        </article>
+      </section>
+
+      <section class="table-grid">
+        <article class="panel">
+          <div class="section-head">
+            <h2>Consensus</h2>
+            <span class="muted" id="consensusDate">-</span>
+          </div>
+          <dl class="detail-list" id="consensusDetails"></dl>
+        </article>
+
+        <article class="panel">
+          <div class="section-head">
+            <h2>HBM Event Tape</h2>
+            <span class="muted" id="eventScore">-</span>
+          </div>
+          <table>
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Company</th>
+                <th>Dir</th>
+                <th>Note</th>
+              </tr>
+            </thead>
+            <tbody id="eventRows"></tbody>
+          </table>
+        </article>
+      </section>
+    </main>
+  </body>
+</html>

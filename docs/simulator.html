@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light" />
+    <title>SHLS Interactive Simulator</title>
+    <link rel="stylesheet" href="assets/styles.css" />
+    <script defer src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+    <script defer src="assets/simulator.js"></script>
+  </head>
+  <body>
+    <header class="topbar">
+      <div>
+        <h1>SHLS Interactive Simulator</h1>
+        <p>h, exposure, forecast price, backtest, and margin monitor</p>
+      </div>
+      <div class="status-strip">
+        <a class="nav-link" href="index.html">Dashboard</a>
+        <a class="nav-link" href="base.html">Base</a>
+        <a class="nav-link" href="research.html">Research</a>
+        <span id="simGeneratedAt" class="muted">-</span>
+      </div>
+    </header>
+
+    <main>
+      <section class="summary-grid simulator-summary">
+        <article class="metric-card">
+          <span>Samsung Now</span>
+          <strong id="simSamsungNow">-</strong>
+          <small id="simSamsungMove">-</small>
+        </article>
+        <article class="metric-card">
+          <span>SK Hynix Now</span>
+          <strong id="simHynixNow">-</strong>
+          <small id="simHynixMove">-</small>
+        </article>
+        <article class="metric-card">
+          <span>h</span>
+          <strong id="simHValue">-</strong>
+          <small>SK short notional / Samsung long notional</small>
+        </article>
+        <article class="metric-card">
+          <span>Expected PnL</span>
+          <strong id="expectedPnl">-</strong>
+          <small id="expectedRoi">-</small>
+        </article>
+        <article class="metric-card">
+          <span>Required Margin</span>
+          <strong id="requiredMargin">-</strong>
+          <small id="marginRateText">-</small>
+        </article>
+        <article class="metric-card">
+          <span>Recommended Buffer</span>
+          <strong id="recommendedMargin">-</strong>
+          <small id="marginBufferText">-</small>
+        </article>
+      </section>
+
+      <section class="panel control-panel">
+        <div class="section-head">
+          <h2>Controls</h2>
+          <span class="muted" id="simPeriod">-</span>
+        </div>
+        <div class="control-grid">
+          <label>
+            <span>h source</span>
+            <select id="hMode">
+              <option value="signal">Signal h</option>
+              <option value="beta">60D rolling beta</option>
+              <option value="vol">60D volatility h</option>
+              <option value="manual">Manual h</option>
+            </select>
+          </label>
+          <label>
+            <span>h</span>
+            <input id="hRange" type="range" min="0.20" max="1.40" step="0.01" />
+            <input id="hInput" type="number" min="0.20" max="1.40" step="0.01" />
+          </label>
+          <label>
+            <span>Product preset</span>
+            <select id="productPreset">
+              <option value="1">Mini futures x1</option>
+              <option value="10">Stock futures x10</option>
+            </select>
+          </label>
+          <label>
+            <span>Contract multiplier</span>
+            <input id="contractMultiplier" type="number" min="1" step="1" />
+          </label>
+          <label>
+            <span>Samsung contracts</span>
+            <input id="samsungContracts" type="number" min="0" step="1" />
+          </label>
+          <label>
+            <span>Account capital</span>
+            <input id="accountCapital" type="number" min="0" step="1000000" />
+          </label>
+          <label>
+            <span>Samsung expected price</span>
+            <input id="samsungExpected" type="number" min="0" step="500" />
+          </label>
+          <label>
+            <span>SK Hynix expected price</span>
+            <input id="hynixExpected" type="number" min="0" step="500" />
+          </label>
+          <label>
+            <span>Margin buffer multiple</span>
+            <input id="bufferMultiple" type="number" min="1" max="5" step="0.25" />
+          </label>
+          <label>
+            <span>Samsung margin rate</span>
+            <input id="samsungMarginRate" type="number" min="0" max="1" step="0.001" />
+          </label>
+          <label>
+            <span>SK Hynix margin rate</span>
+            <input id="hynixMarginRate" type="number" min="0" max="1" step="0.001" />
+          </label>
+          <label>
+            <span>Fee rate, one way bps</span>
+            <input id="feeBps" type="number" min="0" step="0.1" />
+          </label>
+          <label>
+            <span>Slippage, one way bps</span>
+            <input id="slippageBps" type="number" min="0" step="0.1" />
+          </label>
+        </div>
+      </section>
+
+      <section class="table-grid">
+        <article class="panel">
+          <div class="section-head">
+            <h2>Position</h2>
+            <span class="muted">mini-futures contract based</span>
+          </div>
+          <dl id="positionDetails" class="detail-list"></dl>
+        </article>
+        <article class="panel">
+          <div class="section-head">
+            <h2>Expected Price Result</h2>
+            <span class="muted">current to forecast</span>
+          </div>
+          <dl id="forecastDetails" class="detail-list"></dl>
+        </article>
+      </section>
+
+      <section class="chart-grid">
+        <article class="chart-panel">
+          <div class="section-head">
+            <h2>2Y Backtest</h2>
+            <span class="muted">fixed h vs rolling beta h</span>
+          </div>
+          <canvas id="backtestChart"></canvas>
+        </article>
+        <article class="chart-panel">
+          <div class="section-head">
+            <h2>h Sensitivity</h2>
+            <span class="muted">final return and max drawdown</span>
+          </div>
+          <canvas id="sensitivityChart"></canvas>
+        </article>
+      </section>
+
+      <section class="table-grid">
+        <article class="panel">
+          <div class="section-head">
+            <h2>Backtest Metrics</h2>
+            <span class="muted">2Y period</span>
+          </div>
+          <dl id="backtestMetrics" class="detail-list"></dl>
+        </article>
+        <article class="panel">
+          <div class="section-head">
+            <h2>Rolling Beta Strategy</h2>
+            <span class="muted">60D regression hedge</span>
+          </div>
+          <dl id="rollingBetaDetails" class="detail-list"></dl>
+        </article>
+        <article class="panel scenario-panel">
+          <div class="section-head">
+            <h2>Scenario Matrix</h2>
+            <span class="muted">PnL / account capital</span>
+          </div>
+          <div class="table-scroll">
+            <table>
+              <thead id="scenarioHead"></thead>
+              <tbody id="scenarioBody"></tbody>
+            </table>
+          </div>
+        </article>
+      </section>
+
+      <section class="panel scenario-panel">
+        <div class="section-head">
+          <h2>h Strategy Contract Table</h2>
+          <span class="muted">same Samsung contracts, current price based</span>
+        </div>
+        <div class="table-scroll">
+          <table>
+            <thead>
+              <tr>
+                <th>Target h</th>
+                <th>Samsung C</th>
+                <th>SK Hynix C</th>
+                <th>Actual h</th>
+                <th>Gross Notional</th>
+                <th>Required Margin</th>
+                <th>Round-trip Cost</th>
+              </tr>
+            </thead>
+            <tbody id="hStrategyRows"></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

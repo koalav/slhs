@@ -1,0 +1,7 @@
+date,company,source,rating,current_price_krw,target_price_krw,target_high_krw,target_low_krw,upside_pct,note,source_url
+2026-05-28,Samsung Electronics,Investing consensus,Strong Buy,299250,361046,590000,205000,0.2065,Seed from shared strategy note; replace with licensed consensus if available.,https://chatgpt.com/share/6a17bbc2-52a0-83a4-b4d4-55d948a33a5d
+2026-05-28,SK Hynix,Investing consensus,Strong Buy,2241000,2076603,4000000,1030000,-0.0746,Seed from shared strategy note; replace with licensed consensus if available.,https://chatgpt.com/share/6a17bbc2-52a0-83a4-b4d4-55d948a33a5d
+2026-05-27,Samsung Electronics,Mirae Asset via shared note,Buy,307000,550000,,,0.7920,Bullish Samsung target cited in shared strategy note.,https://chatgpt.com/share/6a17bbc2-52a0-83a4-b4d4-55d948a33a5d
+2026-05-27,SK Hynix,Mirae Asset via shared note,Buy,2243000,3800000,,,0.6940,Bullish SK Hynix target cited in shared strategy note.,https://chatgpt.com/share/6a17bbc2-52a0-83a4-b4d4-55d948a33a5d
+2026-05-07,Samsung Electronics,SK Securities via shared note,Buy,307000,500000,,,0.6290,Bullish Samsung target cited in shared strategy note.,https://chatgpt.com/share/6a17bbc2-52a0-83a4-b4d4-55d948a33a5d
+2026-05-07,SK Hynix,SK Securities via shared note,Buy,2243000,3000000,,,0.3370,Bullish SK Hynix target cited in shared strategy note.,https://chatgpt.com/share/6a17bbc2-52a0-83a4-b4d4-55d948a33a5d

@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light" />
+    <title>SHLS Research Inputs</title>
+    <link rel="stylesheet" href="assets/styles.css" />
+    <script defer src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+    <script defer src="assets/research.js"></script>
+  </head>
+  <body>
+    <header class="topbar">
+      <div>
+        <h1>SHLS Research Inputs</h1>
+        <p>target price, earnings trend, key articles, and global memory factors</p>
+      </div>
+      <div class="status-strip">
+        <a class="nav-link" href="index.html">Dashboard</a>
+        <a class="nav-link" href="base.html">Base</a>
+        <a class="nav-link" href="simulator.html">Simulator</a>
+        <span id="researchGeneratedAt" class="muted">-</span>
+      </div>
+    </header>
+
+    <main>
+      <section class="summary-grid research-summary" id="coverageGrid"></section>
+
+      <section class="chart-grid">
+        <article class="chart-panel">
+          <div class="section-head">
+            <h2>Target Price Upside</h2>
+            <span class="muted">manual/seeded consensus rows</span>
+          </div>
+          <canvas id="targetChart"></canvas>
+        </article>
+        <article class="chart-panel">
+          <div class="section-head">
+            <h2>Operating Profit Trend</h2>
+            <span class="muted">actual and estimate, KRW trillion</span>
+          </div>
+          <canvas id="earningsChart"></canvas>
+        </article>
+      </section>
+
+      <section class="table-grid">
+        <article class="panel">
+          <div class="section-head">
+            <h2>Target Prices</h2>
+            <span class="muted">source-linked rows</span>
+          </div>
+          <div class="table-scroll">
+            <table>
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Company</th>
+                  <th>Source</th>
+                  <th>Target</th>
+                  <th>Upside</th>
+                </tr>
+              </thead>
+              <tbody id="targetRows"></tbody>
+            </table>
+          </div>
+        </article>
+        <article class="panel">
+          <div class="section-head">
+            <h2>Earnings Trend</h2>
+            <span class="muted">actual/estimate</span>
+          </div>
+          <div class="table-scroll">
+            <table>
+              <thead>
+                <tr>
+                  <th>Period</th>
+                  <th>Type</th>
+                  <th>Company</th>
+                  <th>Revenue</th>
+                  <th>OP</th>
+                  <th>Margin</th>
+                </tr>
+              </thead>
+              <tbody id="earningsRows"></tbody>
+            </table>
+          </div>
+        </article>
+      </section>
+
+      <section class="table-grid">
+        <article class="panel">
+          <div class="section-head">
+            <h2>Major Articles</h2>
+            <span class="muted">direction is Samsung long / Hynix short view</span>
+          </div>
+          <div class="article-list" id="articleRows"></div>
+        </article>
+        <article class="panel">
+          <div class="section-head">
+            <h2>Global Memory Factors</h2>
+            <span class="muted">HBM bit growth, validation, supply/demand</span>
+          </div>
+          <div class="table-scroll">
+            <table>
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Category</th>
+                  <th>Company</th>
+                  <th>Metric</th>
+                  <th>Value</th>
+                  <th>Dir</th>
+                </tr>
+              </thead>
+              <tbody id="globalRows"></tbody>
+            </table>
+          </div>
+        </article>
+      </section>
+    </main>
+  </body>
+</html>

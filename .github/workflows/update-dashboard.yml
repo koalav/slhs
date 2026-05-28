@@ -1,0 +1,29 @@
+name: Update dashboard snapshot
+
+on:
+  workflow_dispatch:
+  schedule:
+    # KST market hours are roughly 00:00-06:30 UTC.
+    - cron: "*/15 0-6 * * 1-5"
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Build snapshot
+        run: |
+          python scripts/build_snapshot.py --output docs/data/latest.json
+          python scripts/build_base_materials.py --output docs/data/base.json
+          python scripts/build_research_materials.py --output docs/data/research.json
+      - name: Commit snapshot
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "Update dashboard snapshot"
+          file_pattern: docs/data/latest.json docs/data/base.json docs/data/research.json
