@@ -17,8 +17,7 @@
       </div>
       <div class="status-strip">
         <a class="nav-link" href="index.html">대시보드</a>
-        <a class="nav-link" href="base.html">기초자료</a>
-        <a class="nav-link" href="research.html">리서치</a>
+        <a class="nav-link" href="base.html">기초/리서치</a>
         <a class="nav-link" href="backtest.html">백테스트</a>
         <span id="simGeneratedAt" class="muted">-</span>
       </div>
@@ -58,85 +57,84 @@
         </article>
       </section>
 
-      <section class="panel control-panel">
-        <div class="section-head">
-          <h2 class="title-line">입력값 <span class="help" tabindex="0" title="h, 계약 수, 예상 가격, 비용, 증거금률을 바꾸면 모든 결과가 즉시 재계산됩니다.">?</span></h2>
-          <span class="muted" id="simPeriod">-</span>
-        </div>
-        <div class="control-grid">
-          <label>
-            <span>h 기준</span>
-            <select id="hMode">
-              <option value="signal">시그널 h</option>
-              <option value="beta">60일 rolling 베타</option>
-              <option value="vol">60일 변동성 h</option>
-              <option value="manual">수동 h</option>
-            </select>
-          </label>
-          <label>
-            <span>h</span>
-            <input id="hRange" type="range" min="0.20" max="1.40" step="0.01" />
-            <input id="hInput" type="number" min="0.20" max="1.40" step="0.01" />
-          </label>
-          <label>
-            <span>상품 프리셋</span>
-            <select id="productPreset">
-              <option value="10">주식선물 x10</option>
-              <option value="1">미니선물 x1</option>
-            </select>
-          </label>
-          <label>
-            <span>계약 승수</span>
-            <input id="contractMultiplier" type="number" min="1" step="1" />
-          </label>
-          <label>
-            <span>삼성전자 계약 수</span>
-            <input id="samsungContracts" type="number" min="0" step="1" />
-          </label>
-          <label>
-            <span>계좌 기준금액</span>
-            <input id="accountCapital" type="number" min="0" step="1000000" />
-          </label>
-          <label>
-            <span>삼성전자 예상가</span>
-            <input id="samsungExpected" type="number" min="0" step="500" />
-          </label>
-          <label>
-            <span>SK하이닉스 예상가</span>
-            <input id="hynixExpected" type="number" min="0" step="500" />
-          </label>
-          <label>
-            <span>증거금 버퍼 배수</span>
-            <input id="bufferMultiple" type="number" min="1" max="5" step="0.25" />
-          </label>
-          <label>
-            <span>삼성전자 증거금률</span>
-            <input id="samsungMarginRate" type="number" min="0" max="1" step="0.001" />
-          </label>
-          <label>
-            <span>SK하이닉스 증거금률</span>
-            <input id="hynixMarginRate" type="number" min="0" max="1" step="0.001" />
-          </label>
-          <label>
-            <span>수수료, 편도 bps</span>
-            <input id="feeBps" type="number" min="0" step="0.1" />
-          </label>
-          <label>
-            <span>슬리피지, 편도 bps</span>
-            <input id="slippageBps" type="number" min="0" step="0.1" />
-          </label>
-        </div>
-      </section>
-
-      <section class="table-grid">
-        <article class="panel">
+      <section class="lab-layout">
+        <article class="panel control-panel lab-controls">
+          <div class="section-head">
+            <h2 class="title-line">입력값 <span class="help" tabindex="0" title="h, 계약 수, 예상 가격, 비용, 증거금률을 바꾸면 모든 결과가 즉시 재계산됩니다.">?</span></h2>
+            <span class="muted" id="simPeriod">-</span>
+          </div>
+          <div class="control-grid">
+            <label>
+              <span>h 기준</span>
+              <select id="hMode">
+                <option value="signal">시그널 h</option>
+                <option value="beta">60일 rolling 베타</option>
+                <option value="vol">60일 변동성 h</option>
+                <option value="manual">수동 h</option>
+              </select>
+            </label>
+            <label>
+              <span>h</span>
+              <input id="hRange" type="range" min="0.20" max="1.40" step="0.01" />
+              <input id="hInput" type="number" min="0.20" max="1.40" step="0.01" />
+            </label>
+            <label>
+              <span>상품 프리셋</span>
+              <select id="productPreset">
+                <option value="10">주식선물 x10</option>
+                <option value="1">미니선물 x1</option>
+              </select>
+            </label>
+            <label>
+              <span>계약 승수</span>
+              <input id="contractMultiplier" type="number" min="1" step="1" />
+            </label>
+            <label>
+              <span>삼성전자 계약 수</span>
+              <input id="samsungContracts" type="number" min="0" step="1" />
+            </label>
+            <label>
+              <span>계좌 기준금액</span>
+              <input id="accountCapital" type="number" min="0" step="1000000" />
+            </label>
+            <label>
+              <span>삼성전자 예상가</span>
+              <input id="samsungExpected" type="number" min="0" step="500" />
+            </label>
+            <label>
+              <span>SK하이닉스 예상가</span>
+              <input id="hynixExpected" type="number" min="0" step="500" />
+            </label>
+            <label>
+              <span>증거금 버퍼 배수</span>
+              <input id="bufferMultiple" type="number" min="1" max="5" step="0.25" />
+            </label>
+            <label>
+              <span>삼성전자 증거금률</span>
+              <input id="samsungMarginRate" type="number" min="0" max="1" step="0.001" />
+            </label>
+            <label>
+              <span>SK하이닉스 증거금률</span>
+              <input id="hynixMarginRate" type="number" min="0" max="1" step="0.001" />
+            </label>
+            <label>
+              <span>수수료, 편도 bps</span>
+              <input id="feeBps" type="number" min="0" step="0.1" />
+            </label>
+            <label>
+              <span>슬리피지, 편도 bps</span>
+              <input id="slippageBps" type="number" min="0" step="0.1" />
+            </label>
+          </div>
+        </article>
+        <article class="panel lab-result">
           <div class="section-head">
             <h2 class="title-line">포지션 <span class="help" tabindex="0" title="현재 입력값으로 구성되는 삼성전자 롱과 SK하이닉스 숏 계약 수와 명목금액입니다.">?</span></h2>
             <span class="muted">주식선물 계약 기준</span>
           </div>
           <dl id="positionDetails" class="detail-list"></dl>
         </article>
-        <article class="panel">
+        <article class="panel lab-result">
           <div class="section-head">
             <h2 class="title-line">예상가 손익 <span class="help" tabindex="0" title="현재가에서 사용자가 입력한 예상가까지 이동할 때의 각 레그 손익입니다.">?</span></h2>
             <span class="muted">현재가에서 예상가까지</span>

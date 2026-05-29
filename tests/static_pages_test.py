@@ -24,7 +24,9 @@ def check_html_assets(path: str) -> None:
     for href in re.findall(r'href="([^"]+)"', html):
         if href.startswith(("http://", "https://", "#")):
             continue
-        assert_exists(str((Path(path).parent / href).as_posix()))
+        asset_path = href.split("#", 1)[0]
+        if asset_path:
+            assert_exists(str((Path(path).parent / asset_path).as_posix()))
     for src in re.findall(r'src="([^"]+)"', html):
         if src.startswith(("http://", "https://")):
             continue
@@ -52,6 +54,7 @@ def main() -> None:
 
     check_required_ids("docs/index.html", "docs/assets/app.js")
     check_required_ids("docs/base.html", "docs/assets/base.js")
+    check_required_ids("docs/base.html", "docs/assets/research.js")
     check_required_ids("docs/research.html", "docs/assets/research.js")
     check_required_ids("docs/simulator.html", "docs/assets/simulator.js")
     check_required_ids("docs/backtest.html", "docs/assets/backtest.js")

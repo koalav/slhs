@@ -17,8 +17,7 @@
       </div>
       <div class="status-strip">
         <a class="nav-link" href="index.html">대시보드</a>
-        <a class="nav-link" href="base.html">기초자료</a>
-        <a class="nav-link" href="research.html">리서치</a>
+        <a class="nav-link" href="base.html">기초/리서치</a>
         <a class="nav-link" href="simulator.html">시뮬레이터</a>
         <span id="btGeneratedAt" class="muted">-</span>
       </div>
@@ -58,49 +57,65 @@
         </article>
       </section>
 
-      <section class="panel control-panel">
-        <div class="section-head">
-          <h2 class="title-line">백테스트 입력 <span class="help" tabindex="0" title="전략, 진입일, 계약 수, h, 비용을 바꾸면 그래프와 손익이 즉시 다시 계산됩니다.">?</span></h2>
-          <span class="muted" id="btPeriod">-</span>
-        </div>
-        <div class="control-grid">
-          <label>
-            <span>전략</span>
-            <select id="btStrategy">
-              <option value="pair">삼성 롱 / SK 숏</option>
-              <option value="samsung">삼성전자 단독 롱</option>
-              <option value="hynix">SK하이닉스 단독 롱</option>
-            </select>
-          </label>
-          <label>
-            <span>진입일</span>
-            <select id="btEntrySelect"></select>
-          </label>
-          <label>
-            <span>계약 승수</span>
-            <input id="btMultiplier" type="number" min="1" step="1" />
-          </label>
-          <label>
-            <span>계좌 기준금액</span>
-            <input id="btCapital" type="number" min="0" step="1000000" />
-          </label>
-          <label>
-            <span>삼성전자 계약 수</span>
-            <input id="btSamsungContracts" type="number" min="0" step="1" />
-          </label>
-          <label>
-            <span>SK하이닉스 계약 수</span>
-            <input id="btHynixContracts" type="number" min="0" step="1" />
-          </label>
-          <label>
-            <span>페어 h</span>
-            <input id="btH" type="number" min="0.2" max="1.4" step="0.01" />
-          </label>
-          <label>
-            <span>수수료+슬리피지, 편도 bps</span>
-            <input id="btCostBps" type="number" min="0" step="0.1" />
-          </label>
-        </div>
+      <section class="lab-layout">
+        <article class="panel control-panel lab-controls">
+          <div class="section-head">
+            <h2 class="title-line">백테스트 입력 <span class="help" tabindex="0" title="전략, 진입일, 계약 수, h, 비용을 바꾸면 그래프와 손익이 즉시 다시 계산됩니다.">?</span></h2>
+            <span class="muted" id="btPeriod">-</span>
+          </div>
+          <div class="control-grid">
+            <label>
+              <span>전략</span>
+              <select id="btStrategy">
+                <option value="pair">삼성 롱 / SK 숏</option>
+                <option value="samsung">삼성전자 단독 롱</option>
+                <option value="hynix">SK하이닉스 단독 롱</option>
+              </select>
+            </label>
+            <label>
+              <span>진입일</span>
+              <select id="btEntrySelect"></select>
+            </label>
+            <label>
+              <span>계약 승수</span>
+              <input id="btMultiplier" type="number" min="1" step="1" />
+            </label>
+            <label>
+              <span>계좌 기준금액</span>
+              <input id="btCapital" type="number" min="0" step="1000000" />
+            </label>
+            <label>
+              <span>삼성전자 계약 수</span>
+              <input id="btSamsungContracts" type="number" min="0" step="1" />
+            </label>
+            <label>
+              <span>SK하이닉스 계약 수</span>
+              <input id="btHynixContracts" type="number" min="0" step="1" />
+            </label>
+            <label>
+              <span>페어 h</span>
+              <input id="btH" type="number" min="0.2" max="1.4" step="0.01" />
+            </label>
+            <label>
+              <span>수수료+슬리피지, 편도 bps</span>
+              <input id="btCostBps" type="number" min="0" step="0.1" />
+            </label>
+          </div>
+        </article>
+        <article class="panel lab-result">
+          <div class="section-head">
+            <h2 class="title-line">거래 요약 <span class="help" tabindex="0" title="진입 가격, 현재 가격, 계약 수, 비용을 레그별로 확인합니다.">?</span></h2>
+            <span class="muted">진입 종가 기준</span>
+          </div>
+          <dl id="btDetails" class="detail-list"></dl>
+        </article>
+        <article class="panel lab-result">
+          <div class="section-head">
+            <h2 class="title-line">성과 지표 <span class="help" tabindex="0" title="총손익, 순손익, 최대낙폭, 연율 변동성 등 기본 성과 지표입니다.">?</span></h2>
+            <span class="muted">현재까지</span>
+          </div>
+          <dl id="btMetrics" class="detail-list"></dl>
+        </article>
       </section>
 
       <section class="chart-grid">
@@ -110,23 +125,6 @@
             <span class="muted">계좌 수익률 / 낙폭</span>
           </div>
           <canvas id="btEquityChart"></canvas>
-        </article>
-      </section>
-
-      <section class="table-grid">
-        <article class="panel">
-          <div class="section-head">
-            <h2 class="title-line">거래 요약 <span class="help" tabindex="0" title="진입 가격, 현재 가격, 계약 수, 비용을 레그별로 확인합니다.">?</span></h2>
-            <span class="muted">진입 종가 기준</span>
-          </div>
-          <dl id="btDetails" class="detail-list"></dl>
-        </article>
-        <article class="panel">
-          <div class="section-head">
-            <h2 class="title-line">성과 지표 <span class="help" tabindex="0" title="총손익, 순손익, 최대낙폭, 연율 변동성 등 기본 성과 지표입니다.">?</span></h2>
-            <span class="muted">현재까지</span>
-          </div>
-          <dl id="btMetrics" class="detail-list"></dl>
         </article>
       </section>
     </main>

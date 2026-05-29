@@ -44,13 +44,13 @@ Use `docs/` as the Pages publishing directory. The dashboard reads `docs/data/la
 - [PRD](docs/PRD.md)
 - [Base Materials](docs/BASELINE.md)
 - [Interactive Simulator](docs/SIMULATOR.md)
-- Research Inputs: `docs/research.html`
+- Research inputs are shown with base materials in `docs/base.html`.
 
 ## Pages
 
 - `docs/index.html`: entry timing dashboard
-- `docs/base.html`: two-year base chart pack
-- `docs/research.html`: target price, earnings, articles, global memory factors
+- `docs/base.html`: two-year base chart pack plus target price, earnings, articles, global memory factors
+- `docs/research.html`: standalone research view retained for direct links
 - `docs/simulator.html`: interactive h/backtest/forecast/margin simulator
 - `docs/backtest.html`: simple entry-date and position-size PnL backtest
 
