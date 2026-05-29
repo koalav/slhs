@@ -59,11 +59,18 @@ def main() -> None:
     latest = json.loads(read("docs/data/latest.json"))
     base = json.loads(read("docs/data/base.json"))
     research = json.loads(read("docs/data/research.json"))
+    archive_path = ROOT / "docs/data/archive/index.json"
 
     assert latest["schema_version"] == 1
     assert base["period"]["observations"] >= 400
     assert len(base["series"]["dates"]) == len(base["series"]["samsung_close"])
     assert all(item["available"] for item in research["coverage"])
+    if archive_path.exists():
+        archive = json.loads(archive_path.read_text(encoding="utf-8"))
+        assert archive["schema_version"] == 1
+        assert archive["records"], "archive index has no records"
+        for row in archive["records"]:
+            assert_exists(f"docs/data/archive/{row['path']}")
     for row in research["major_articles"]:
         assert row["source_url"].startswith("http"), f"bad article url: {row}"
     for row in research["global_factors"]:

@@ -99,8 +99,9 @@ The dashboard shall:
 
 1. Load `data/latest.json`.
 2. Refresh every 60 seconds in the browser.
-3. Render score, market table, charts, risk table, consensus, and HBM event tape.
+3. Render score, market table, charts, risk table, and consensus snapshot.
 4. Work from GitHub Pages without a backend server.
+5. Preserve daily `latest`, `base`, and `research` payloads under `data/archive/` while keeping current-value dashboard features on the top-level JSON files.
 
 ## 8. Data Requirements
 
@@ -120,6 +121,7 @@ The dashboard shall:
 3. `python3 -m http.server 8000 -d docs` serves a non-empty dashboard.
 4. Score action changes to `WAIT_FOR_REVERSAL` when reversal is missing, even if other scores are positive.
 5. The dashboard works without exposing API keys.
+6. `python3 scripts/archive_data.py` writes a date-keyed archive index and dated payload files.
 
 ## 10. Release Plan
 

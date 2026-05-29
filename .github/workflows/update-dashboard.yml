@@ -28,14 +28,16 @@ jobs:
           python-version: "3.12"
       - name: Build snapshot
         run: |
+          python scripts/archive_data.py --root docs/data --archive-root docs/data/archive
           python scripts/build_snapshot.py --output docs/data/latest.json
           python scripts/build_base_materials.py --output docs/data/base.json
           python scripts/build_research_materials.py --output docs/data/research.json
+          python scripts/archive_data.py --root docs/data --archive-root docs/data/archive
       - name: Commit snapshot
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: "Update dashboard snapshot"
-          file_pattern: docs/data/latest.json docs/data/base.json docs/data/research.json
+          file_pattern: docs/data/latest.json docs/data/base.json docs/data/research.json docs/data/archive/**
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:

@@ -20,6 +20,9 @@ def main() -> int:
     run([sys.executable, "-m", "json.tool", "docs/data/latest.json"], quiet=True)
     run([sys.executable, "-m", "json.tool", "docs/data/base.json"], quiet=True)
     run([sys.executable, "-m", "json.tool", "docs/data/research.json"], quiet=True)
+    archive_index = ROOT / "docs/data/archive/index.json"
+    if archive_index.exists():
+        run([sys.executable, "-m", "json.tool", archive_index.as_posix()], quiet=True)
     run(["node", "--check", "docs/assets/app.js"])
     run(["node", "--check", "docs/assets/base.js"])
     run(["node", "--check", "docs/assets/research.js"])

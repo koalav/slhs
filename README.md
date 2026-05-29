@@ -36,6 +36,8 @@ python3 scripts/test_pages.py
 
 Use `docs/` as the Pages publishing directory. The dashboard reads `docs/data/latest.json`; GitHub Actions can refresh that file on a schedule.
 
+`latest.json`, `base.json`, and `research.json` remain the current dashboard inputs. Before and after each scheduled refresh, the workflow archives the dated payloads under `docs/data/archive/` so previous daily records are retained instead of being lost when the current files are replaced.
+
 ## Documents
 
 - [Architecture](docs/ARCHITECTURE.md)

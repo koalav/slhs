@@ -46,7 +46,9 @@ flowchart LR
   D[Optional pykrx/KRX] --> B
   B --> E[Signal engine]
   E --> F[docs/data/latest.json]
+  E --> I[docs/data/archive dated records]
   F --> G[GitHub Pages static dashboard]
+  I --> G
   H[GitHub Actions schedule] --> B
 ```
 
@@ -62,7 +64,7 @@ python3 -m http.server 8000 -d docs
 GitHub Pages mode:
 
 ```text
-GitHub Actions cron -> build_snapshot.py -> commit docs/data/latest.json -> Pages serves static HTML
+GitHub Actions cron -> archive current JSON -> build JSON -> archive dated JSON -> commit -> Pages serves static HTML
 ```
 
 Because GitHub Pages is static, true tick-by-tick updates cannot happen from the server side. The practical production pattern is scheduled snapshots plus optional browser refresh. API keys must stay in GitHub Actions secrets or local environment variables, never in client JavaScript.
@@ -138,7 +140,9 @@ src/shls/
   manual_data.py   Consensus and HBM event CSV loaders
   signals.py       Scorecard, risk model, chart series
   snapshot.py      JSON snapshot orchestration
+  archive.py       Date-keyed JSON archive writer
 scripts/
+  archive_data.py
   build_snapshot.py
   watch_snapshot.py
   smoke_test.py
@@ -146,6 +150,7 @@ docs/
   index.html
   assets/
   data/latest.json
+  data/archive/
 data/manual/
   consensus.csv
   hbm_events.csv

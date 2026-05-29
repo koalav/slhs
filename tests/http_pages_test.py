@@ -46,6 +46,11 @@ def main() -> None:
         assert latest["schema_version"] == 1
         assert base["schema_version"] == 1
         assert research["schema_version"] == 1
+        archive_index = DOCS / "data/archive/index.json"
+        if archive_index.exists():
+            archive = json.loads(fetch(base_url, "/data/archive/index.json"))
+            assert archive["schema_version"] == 1
+            assert archive["records"]
     finally:
         server.shutdown()
         server.server_close()
