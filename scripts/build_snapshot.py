@@ -16,7 +16,6 @@ def main() -> int:
     parser.add_argument("--output", default="docs/data/latest.json")
     parser.add_argument("--history-dir", default="")
     parser.add_argument("--consensus", default="data/manual/consensus.csv")
-    parser.add_argument("--events", default="data/manual/hbm_events.csv")
     parser.add_argument("--history-range", default="2y")
     parser.add_argument("--offline", action="store_true", help="Use deterministic fixture data")
     parser.add_argument("--no-fixture-on-error", action="store_true")
@@ -24,7 +23,6 @@ def main() -> int:
 
     snapshot = build_snapshot(
         consensus_path=args.consensus,
-        events_path=args.events,
         history_range=args.history_range,
         fixture_on_error=not args.no_fixture_on_error,
         offline=args.offline,

@@ -6,7 +6,7 @@ from pathlib import Path
 from typing import Any
 
 from .config import DEFAULT_CONFIG
-from .manual_data import load_consensus, load_events
+from .manual_data import load_consensus
 from .providers import DataProviderError, collect_market_data, fetch_pykrx_flow
 from .sample_data import make_fixture
 from .signals import build_signals
@@ -14,7 +14,6 @@ from .signals import build_signals
 
 def build_snapshot(
     consensus_path: str | Path = "data/manual/consensus.csv",
-    events_path: str | Path = "data/manual/hbm_events.csv",
     history_range: str = "2y",
     fixture_on_error: bool = True,
     offline: bool = False,
@@ -32,8 +31,7 @@ def build_snapshot(
             market = make_fixture()
 
     consensus_rows = load_consensus(consensus_path)
-    events = load_events(events_path)
-    signals = build_signals(market, consensus_rows, events, DEFAULT_CONFIG)
+    signals = build_signals(market, consensus_rows, DEFAULT_CONFIG)
 
     series_dates = signals.get("series", {}).get("dates") or []
     flow = {"available": False, "reason": "insufficient history"}

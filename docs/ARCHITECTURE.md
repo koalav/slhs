@@ -34,7 +34,6 @@ Is the Samsung / SK Hynix spread starting to reverse after an extreme gap?
 | Risk | 1H notional, hedge ratio, margin estimate, stress PnL | Sizing and loss planning | Python signal engine |
 | Macro | KOSPI, NASDAQ, VIX, USD/KRW, SOXX | Risk regime context | Yahoo chart API |
 | Consensus | Target prices and OP estimates | Samsung revision advantage | Manual CSV seed |
-| HBM events | HBM4/customer/supply news | Catalyst and thesis risk | Manual CSV event tape |
 | Flow | Foreign/institution flow, short data | Hynix fade confirmation | Optional `pykrx` hook |
 
 ## 3. System Diagram
@@ -42,7 +41,7 @@ Is the Samsung / SK Hynix spread starting to reverse after an extreme gap?
 ```mermaid
 flowchart LR
   A[Naver/Yahoo public data] --> B[Python collector]
-  C[Manual CSV consensus/events] --> B
+  C[Manual CSV consensus] --> B
   D[Optional pykrx/KRX] --> B
   B --> E[Signal engine]
   E --> F[docs/data/latest.json]
@@ -115,9 +114,8 @@ Entry timing:
 | Spread oversold | 15 |
 | Spread reversal | 25 |
 | Earnings revision | 20 |
-| HBM event | 15 |
 | Hynix fade | 10 |
-| Total | 100 |
+| Total | 85 |
 
 Action thresholds:
 
@@ -137,7 +135,7 @@ src/shls/
   config.py        Strategy constants and symbols
   providers.py     Yahoo/Naver/optional pykrx data collection
   indicators.py    Rolling math, z-score, volatility, beta
-  manual_data.py   Consensus and HBM event CSV loaders
+  manual_data.py   Consensus CSV loader
   signals.py       Scorecard, risk model, chart series
   snapshot.py      JSON snapshot orchestration
   archive.py       Date-keyed JSON archive writer
@@ -153,7 +151,6 @@ docs/
   data/archive/
 data/manual/
   consensus.csv
-  hbm_events.csv
 ```
 
 ## 7. Key Technologies

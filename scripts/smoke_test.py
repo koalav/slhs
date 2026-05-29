@@ -17,6 +17,8 @@ def main() -> int:
     assert "signals" in snapshot
     assert snapshot["signals"]["series"]["dates"]
     assert snapshot["signals"]["score"]["action"]
+    assert "hbm_events" not in snapshot["signals"]
+    assert "hbm_event" not in snapshot["signals"]["score"]["components"]
     assert snapshot["signals"]["position_1h"]["samsung_contracts"] == 11
     print("smoke test passed")
     return 0

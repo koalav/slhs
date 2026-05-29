@@ -8,7 +8,6 @@ from .config import DEFAULT_CONFIG, StrategyConfig
 from .indicators import (
     annualized_volatility,
     beta,
-    clamp,
     compact_series,
     correlation,
     cumulative_weighted_spread,
@@ -20,9 +19,10 @@ from .indicators import (
     trailing_max,
     trailing_min,
 )
-from .manual_data import consensus_summary, hbm_event_summary
+from .manual_data import consensus_summary
 
 KST = timezone(timedelta(hours=9))
+SCORE_MAX = 85
 
 
 def _common_history(market: dict[str, Any]) -> dict[str, list[Any]]:
@@ -148,7 +148,6 @@ def _score_hynix_fade(
 def build_signals(
     market: dict[str, Any],
     consensus_rows: list[dict[str, Any]],
-    events: list[dict[str, Any]],
     config: StrategyConfig = DEFAULT_CONFIG,
 ) -> dict[str, Any]:
     history = _common_history(market)
@@ -203,16 +202,12 @@ def build_signals(
         skhynix.get("price"),
         config.model_hedge_h,
     )
-    today = datetime.now(KST).date()
-    hbm = hbm_event_summary(events, today)
-
     value_score = _score_value_gap(ratio_latest, config)
     oversold_score = _score_oversold(z_latest, config)
     reversal_score, reversal_confirmed = _score_reversal(
         z_latest, z_min10, spread_latest, spread_ma20_latest, config
     )
     consensus_score = _score_consensus(consensus)
-    hbm_score = hbm.get("score", 0) if hbm.get("available") else 0
     hynix_fade_score, hynix_fade = _score_hynix_fade(
         skhynix_close, skhynix_turnover, ratio_latest, ratio_ma20_latest
     )
@@ -221,7 +216,6 @@ def build_signals(
         + oversold_score
         + reversal_score
         + consensus_score
-        + hbm_score
         + hynix_fade_score
     )
 
@@ -258,6 +252,7 @@ def build_signals(
         samsung_notional * config.samsung_margin_rate
         + skhynix_notional * config.skhynix_margin_rate
     )
+    today = datetime.now(KST).date()
     expiry = next_stock_futures_expiry(today)
     dte_business = business_days_until(today, expiry)
 
@@ -274,7 +269,7 @@ def build_signals(
         "config": config.__dict__,
         "score": {
             "total": int(total_score),
-            "max": 100,
+            "max": SCORE_MAX,
             "action": action,
             "action_label": action_label,
             "components": {
@@ -282,7 +277,6 @@ def build_signals(
                 "spread_oversold": oversold_score,
                 "spread_reversal": reversal_score,
                 "earnings_revision": consensus_score,
-                "hbm_event": hbm_score,
                 "hynix_fade": hynix_fade_score,
             },
             "required": {
@@ -309,7 +303,6 @@ def build_signals(
         },
         "flags": hynix_fade,
         "consensus": consensus,
-        "hbm_events": hbm,
         "position_1h": {
             "samsung_contracts": config.samsung_contracts_1h,
             "skhynix_contracts": config.skhynix_contracts_1h,

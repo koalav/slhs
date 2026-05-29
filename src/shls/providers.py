@@ -113,6 +113,41 @@ def parse_yahoo_bars(chart: dict[str, Any]) -> list[dict[str, Any]]:
     return bars
 
 
+def _quote_date(quote: dict[str, Any]) -> date | None:
+    updated_at = quote.get("updated_at")
+    if not isinstance(updated_at, str) or not updated_at:
+        return None
+    try:
+        return datetime.fromisoformat(updated_at.replace("Z", "+00:00")).date()
+    except ValueError:
+        return None
+
+
+def apply_realtime_quote_to_latest_bar(
+    bars: list[dict[str, Any]], quote: dict[str, Any]
+) -> list[dict[str, Any]]:
+    if not bars:
+        return bars
+    price = safe_float(quote.get("price"))
+    quote_day = _quote_date(quote)
+    if price is None or quote_day is None:
+        return bars
+
+    latest = bars[-1]
+    if latest.get("date") != quote_day.isoformat():
+        return bars
+
+    latest["close"] = price
+    latest["timestamp"] = quote.get("updated_at") or latest.get("timestamp")
+    if quote.get("intraday_volume") is not None:
+        latest["volume"] = quote.get("intraday_volume")
+    high = safe_float(latest.get("high"))
+    low = safe_float(latest.get("low"))
+    latest["high"] = max(high, price) if high is not None else price
+    latest["low"] = min(low, price) if low is not None else price
+    return bars
+
+
 def _clean_number(raw: str | None) -> float | None:
     if raw is None:
         return None
@@ -230,6 +265,7 @@ def fetch_equity(equity: EquityConfig, history_range: str = "2y") -> dict[str, A
         chart = fetch_yahoo_chart(equity.yahoo_symbol, range_=history_range, interval="1d")
         quote = quote_from_yahoo_chart(equity.yahoo_symbol, chart)
         bars = parse_yahoo_bars(chart)
+    bars = apply_realtime_quote_to_latest_bar(bars, quote)
 
     shares = profile.get("shares_outstanding") or equity.fallback_shares
     if quote.get("market_cap_krw") is not None:

@@ -62,6 +62,12 @@ def main() -> None:
     archive_path = ROOT / "docs/data/archive/index.json"
 
     assert latest["schema_version"] == 1
+    assert "hbm_events" not in latest["signals"]
+    assert "hbm_event" not in latest["signals"]["score"]["components"]
+    for equity in latest["market"]["equities"].values():
+        last_bar = equity["history"][-1]
+        if equity.get("updated_at", "").startswith(last_bar["date"]):
+            assert last_bar["close"] == equity["price"], f"latest bar not quote-adjusted: {equity['code']}"
     assert base["period"]["observations"] >= 400
     assert len(base["series"]["dates"]) == len(base["series"]["samsung_close"])
     assert all(item["available"] for item in research["coverage"])
@@ -71,6 +77,10 @@ def main() -> None:
         assert archive["records"], "archive index has no records"
         for row in archive["records"]:
             assert_exists(f"docs/data/archive/{row['path']}")
+            if row["kind"] == "latest":
+                archived_latest = json.loads(read(f"docs/data/archive/{row['path']}"))
+                assert "hbm_events" not in archived_latest["signals"]
+                assert "hbm_event" not in archived_latest["signals"]["score"]["components"]
     for row in research["major_articles"]:
         assert row["source_url"].startswith("http"), f"bad article url: {row}"
     for row in research["global_factors"]:

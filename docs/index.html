@@ -9,7 +9,7 @@
     <script defer src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
     <script defer src="assets/app.js"></script>
   </head>
-  <body>
+  <body class="dashboard-compact">
     <header class="topbar">
       <div>
         <h1>SHLS 진입 타이밍 대시보드</h1>
@@ -26,11 +26,11 @@
     </header>
 
     <main>
-      <section class="summary-grid">
-        <article class="score-panel">
+      <section class="compact-kpi-grid">
+        <article class="score-panel compact-score">
           <div class="panel-label label-line">
             진입 점수
-            <span class="help" tabindex="0" title="가치 격차, 스프레드 과매도, 반전 확인, 실적 수정, HBM 이벤트, SK하이닉스 둔화 신호를 합산한 0-100점 진입 판단 지표입니다.">?</span>
+            <span class="help" tabindex="0" title="가치 격차, 스프레드 과매도, 반전 확인, 실적 수정, SK하이닉스 둔화 신호를 합산한 진입 판단 지표입니다.">?</span>
           </div>
           <div class="score-row">
             <strong id="scoreValue">-</strong>
@@ -42,24 +42,34 @@
           <dl id="scoreComponents" class="component-list"></dl>
         </article>
 
-        <article class="metric-card" title="SK하이닉스 시가총액을 삼성전자 시가총액으로 나눈 값입니다. 20일 평균보다 높은지 함께 봅니다.">
+        <article class="metric-card compact-metric" title="SK하이닉스 시가총액을 삼성전자 시가총액으로 나눈 값입니다. 20일 평균보다 높은지 함께 봅니다.">
           <span class="label-line">SK/삼성 시총 비율 <span class="help" tabindex="0" title="SK하이닉스 시가총액 / 삼성전자 시가총액입니다. 상대 과열 또는 가치 격차 판단에 사용합니다.">?</span></span>
           <strong id="mcapRatio">-</strong>
           <small id="mcapRatioMa">-</small>
         </article>
-        <article class="metric-card" title="삼성전자 롱과 SK하이닉스 숏의 가중 스프레드가 최근 60일 평균 대비 얼마나 벗어났는지 보여줍니다.">
+        <article class="metric-card compact-metric" title="삼성전자 롱과 SK하이닉스 숏의 가중 스프레드가 최근 60일 평균 대비 얼마나 벗어났는지 보여줍니다.">
           <span class="label-line">스프레드 Z값 <span class="help" tabindex="0" title="60일 기준 스프레드 표준화 값입니다. 음수가 클수록 삼성전자 상대 약세, SK하이닉스 상대 강세가 컸다는 의미입니다.">?</span></span>
           <strong id="spreadZ">-</strong>
           <small id="spreadRequired">-</small>
         </article>
-        <article class="metric-card" title="삼성전자 1시간 롱 노출 대비 SK하이닉스 숏 노출 비율입니다.">
+        <article class="metric-card compact-metric" title="삼성전자 1시간 롱 노출 대비 SK하이닉스 숏 노출 비율입니다.">
           <span class="label-line">1시간 헤지 h <span class="help" tabindex="0" title="SK하이닉스 숏 명목금액 / 삼성전자 롱 명목금액입니다. h가 높을수록 숏 레그 비중이 큽니다.">?</span></span>
           <strong id="actualHedge">-</strong>
           <small id="grossNotional">-</small>
         </article>
+        <article class="metric-card compact-metric" title="최근 60거래일 기준 삼성전자 수익률을 SK하이닉스 수익률에 회귀한 베타입니다.">
+          <span class="label-line">60일 베타 <span class="help" tabindex="0" title="삼성전자 일간 수익률을 SK하이닉스 일간 수익률에 대해 회귀한 값입니다. h 산식과 비교합니다.">?</span></span>
+          <strong id="beta60">-</strong>
+          <small id="betaHint">-</small>
+        </article>
+        <article class="metric-card compact-metric" title="주식선물 1H 기준 필요 증거금과 권장 현금입니다.">
+          <span class="label-line">증거금 <span class="help" tabindex="0" title="현재가와 계약수 기준 추정 필요 증거금입니다. 권장 현금은 3배 버퍼입니다.">?</span></span>
+          <strong id="marginEstimate">-</strong>
+          <small id="cashBuffer">-</small>
+        </article>
       </section>
 
-      <section class="chart-grid">
+      <section class="dashboard-workbench">
         <article class="chart-panel">
           <div class="section-head">
             <h2 class="title-line">상대 가격 <span class="help" tabindex="0" title="두 종목의 가격을 같은 시작점으로 정규화해 상대 강약을 비교합니다.">?</span></h2>
@@ -74,10 +84,17 @@
           </div>
           <canvas id="spreadChart"></canvas>
         </article>
+        <article class="panel compact-panel">
+          <div class="section-head">
+            <h2 class="title-line">전략 수치 <span class="help" tabindex="0" title="현재 스프레드, 베타, 포지션, 증거금, 만기를 한 곳에 모은 운용 체크리스트입니다.">?</span></h2>
+            <span class="muted" id="strategyState">-</span>
+          </div>
+          <dl id="strategyRows" class="detail-list compact-detail"></dl>
+        </article>
       </section>
 
-      <section class="table-grid">
-        <article class="panel">
+      <section class="compact-info-grid">
+        <article class="panel compact-panel">
           <div class="section-head">
             <h2 class="title-line">시장 데이터 <span class="help" tabindex="0" title="현재가, 일간 등락률, 시가총액, PBR을 비교합니다.">?</span></h2>
             <span class="muted" id="dataSource">-</span>
@@ -99,7 +116,7 @@
           </table>
         </article>
 
-        <article class="panel">
+        <article class="panel compact-panel">
           <div class="section-head">
             <h2 class="title-line">리스크 <span class="help" tabindex="0" title="가중 스프레드가 특정 폭으로 움직일 때 1시간 포지션의 추정 손익을 보여줍니다.">?</span></h2>
             <span class="muted" id="expiryInfo">-</span>
@@ -114,10 +131,8 @@
             <tbody id="stressRows"></tbody>
           </table>
         </article>
-      </section>
 
-      <section class="table-grid">
-        <article class="panel wide-panel">
+        <article class="panel compact-panel">
           <div class="section-head">
             <h2 class="title-line">컨센서스 스냅샷 <span class="help" tabindex="0" title="동일 날짜 기준 목표가 업사이드와 영업이익 수정률을 삼성전자와 SK하이닉스가 나란히 보이도록 정리합니다.">?</span></h2>
             <span class="muted" id="consensusDate">-</span>
@@ -135,6 +150,13 @@
               <tbody id="consensusRows"></tbody>
             </table>
           </div>
+        </article>
+        <article class="panel compact-panel">
+          <div class="section-head">
+            <h2 class="title-line">리서치 요약 <span class="help" tabindex="0" title="리서치 페이지의 목표가, 실적, 기사, 글로벌 요소 데이터 포함 여부를 요약합니다.">?</span></h2>
+            <a class="nav-link" href="research.html">전체 보기</a>
+          </div>
+          <dl id="researchBrief" class="detail-list compact-detail"></dl>
         </article>
       </section>
     </main>

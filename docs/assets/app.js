@@ -76,7 +76,15 @@ function applyChartFont() {
 }
 
 async function loadSnapshot() {
-  const url = new URL("data/latest.json", window.location.href);
+  return loadJson("data/latest.json");
+}
+
+async function loadResearch() {
+  return loadJson("data/research.json");
+}
+
+async function loadJson(path) {
+  const url = new URL(path, window.location.href);
   url.searchParams.set("t", Date.now().toString());
   const response = await fetch(url);
   if (!response.ok) throw new Error(`HTTP ${response.status}`);
@@ -87,9 +95,10 @@ function renderSummary(snapshot) {
   const score = snapshot.signals.score;
   const metrics = snapshot.signals.metrics;
   const position = snapshot.signals.position_1h;
+  const maxScore = score.max || 100;
 
-  el("scoreValue").textContent = `${score.total}`;
-  el("scoreBar").style.width = `${Math.min(100, score.total)}%`;
+  el("scoreValue").textContent = `${score.total}/${maxScore}`;
+  el("scoreBar").style.width = `${Math.min(100, (score.total / maxScore) * 100)}%`;
   el("actionLabel").textContent = actionLabel(score.action, score.action_label);
   el("actionLabel").className = `pill ${actionClass(score.action)}`;
   el("mcapRatio").textContent = fmt.pct(metrics.mcap_ratio, 1);
@@ -100,6 +109,10 @@ function renderSummary(snapshot) {
     : "반전 대기";
   el("actualHedge").textContent = fmt.num(position.actual_hedge_h, 3);
   el("grossNotional").textContent = `총 노출 ${fmt.krw(position.gross_notional_krw)}`;
+  el("beta60").textContent = fmt.num(metrics.ols_beta60, 3);
+  el("betaHint").textContent = `변동성 h ${fmt.num(metrics.vol_hedge_h, 3)}`;
+  el("marginEstimate").textContent = fmt.krw(position.margin_estimate_krw);
+  el("cashBuffer").textContent = `권장 ${fmt.krw(position.recommended_cash_3x_margin_krw)}`;
 
   const components = score.components;
   const labels = {
@@ -107,11 +120,35 @@ function renderSummary(snapshot) {
     spread_oversold: "스프레드 과매도",
     spread_reversal: "스프레드 반전",
     earnings_revision: "실적 수정",
-    hbm_event: "HBM 이벤트",
     hynix_fade: "SK하이닉스 둔화",
   };
   el("scoreComponents").innerHTML = Object.entries(components)
     .map(([key, value]) => `<dt>${labels[key] || key}</dt><dd>${value}</dd>`)
+    .join("");
+}
+
+function renderStrategy(snapshot) {
+  const metrics = snapshot.signals.metrics;
+  const position = snapshot.signals.position_1h;
+  const score = snapshot.signals.score;
+  const consensus = snapshot.signals.consensus;
+  el("strategyState").textContent = score.required.spread_reversal_confirmed
+    ? "반전 확인"
+    : "반전 대기";
+
+  const rows = [
+    ["스프레드 / 20일", `${fmt.num(metrics.spread, 3)} / ${fmt.num(metrics.spread_ma20, 3)}`],
+    ["Z값 / 10일 저점", `${fmt.num(metrics.spread_zscore, 2)} / ${fmt.num(metrics.spread_zscore_min10, 2)}`],
+    ["베타 / 변동성 h", `${fmt.num(metrics.ols_beta60, 3)} / ${fmt.num(metrics.vol_hedge_h, 3)}`],
+    ["상관 / SK 거래회전", `${fmt.num(metrics.corr60, 3)} / ${fmt.pct(metrics.skhynix_turnover, 2)}`],
+    ["계약", `삼성 ${position.samsung_contracts}L / 하이닉스 ${position.skhynix_contracts}S`],
+    ["증거금 / 권장", `${fmt.krw(position.margin_estimate_krw)} / ${fmt.krw(position.recommended_cash_3x_margin_krw)}`],
+    ["만기", `${position.next_expiry}, DTE ${position.business_days_to_expiry}`],
+    ["목표가 페어 신호", consensus.available ? fmt.pct(consensus.target_pair_signal) : "-"],
+  ];
+
+  el("strategyRows").innerHTML = rows
+    .map(([label, value]) => `<dt>${label}</dt><dd>${value}</dd>`)
     .join("");
 }
 
@@ -191,6 +228,29 @@ function renderConsensus(snapshot) {
         <td>${diff}</td>
       </tr>`,
     )
+    .join("");
+}
+
+function renderResearchBrief(payload) {
+  if (!payload) {
+    el("researchBrief").innerHTML = "<dt>상태</dt><dd>로드 실패</dd>";
+    return;
+  }
+  const coverage = Object.fromEntries(payload.coverage.map((item) => [item.key, item]));
+  const latestArticle = [...(payload.major_articles || [])].sort((a, b) =>
+    String(b.date).localeCompare(String(a.date)),
+  )[0];
+  const latestEarnings = [...(payload.earnings_trend || [])].reverse()[0];
+  const rows = [
+    ["예상 목표가", `${coverage.expected_target_price?.rows || 0}건`],
+    ["실적 추이", `${coverage.earnings_trend?.rows || 0}건`],
+    ["주요 기사", `${coverage.major_articles?.rows || 0}건`],
+    ["글로벌 요소", `${coverage.global_memory_factors?.rows || 0}건`],
+    ["최근 기사", latestArticle ? `${latestArticle.date} ${latestArticle.publisher}` : "-"],
+    ["최근 실적", latestEarnings ? `${latestEarnings.period} ${latestEarnings.company}` : "-"],
+  ];
+  el("researchBrief").innerHTML = rows
+    .map(([label, value]) => `<dt>${label}</dt><dd>${value}</dd>`)
     .join("");
 }
 
@@ -299,13 +359,18 @@ function renderMeta(snapshot) {
 
 async function refresh() {
   try {
-    const snapshot = await loadSnapshot();
+    const [snapshot, research] = await Promise.all([
+      loadSnapshot(),
+      loadResearch().catch(() => null),
+    ]);
     if (document.fonts?.ready) await document.fonts.ready;
     renderMeta(snapshot);
     renderSummary(snapshot);
+    renderStrategy(snapshot);
     renderMarket(snapshot);
     renderRisk(snapshot);
     renderConsensus(snapshot);
+    renderResearchBrief(research);
     if (window.Chart) {
       renderCharts(snapshot);
     }

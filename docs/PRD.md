@@ -18,7 +18,7 @@ entry trigger = spread reversal plus thesis confirmation
 1. Show the current entry status in one scorecard.
 2. Track SK/Samsung market cap ratio and weighted spread z-score.
 3. Calculate 1H notional, hedge ratio, margin estimate, and stress PnL.
-4. Support manual consensus and HBM event updates.
+4. Support manual consensus updates.
 5. Run locally for near-real-time monitoring and publish statically to GitHub Pages.
 
 ## 4. Non-Goals
@@ -39,7 +39,7 @@ An individual or small research workflow monitoring the Samsung relative-revalua
 | U1 | As a user, I can see whether the current state is no-entry, watch, test, or 1H candidate. | P0 |
 | U2 | As a user, I can see whether spread reversal is confirmed. | P0 |
 | U3 | As a user, I can inspect market cap ratio, spread z-score, volatility, and hedge ratio. | P0 |
-| U4 | As a user, I can update consensus and event CSV files without editing code. | P1 |
+| U4 | As a user, I can update consensus CSV files without editing code. | P1 |
 | U5 | As a user, I can publish the dashboard on GitHub Pages. | P1 |
 | U6 | As a user, I can run a local 60-second watcher. | P1 |
 | U7 | As a user, I can later add broker real-time quotes without replacing the UI. | P2 |
@@ -55,8 +55,7 @@ The system shall build `docs/data/latest.json` containing:
 3. Signal score and component scores.
 4. 1H position risk.
 5. Consensus summary.
-6. HBM event summary.
-7. Optional pykrx investor flow.
+6. Optional pykrx investor flow.
 
 ### FR2. Entry Scorecard
 
@@ -64,7 +63,7 @@ The system shall calculate:
 
 ```text
 total score = value gap + spread oversold + spread reversal
-            + earnings revision + HBM event + Hynix fade
+            + earnings revision + Hynix fade
 ```
 
 The system shall downgrade any test or entry action to "wait for reversal" when spread reversal is not confirmed.
@@ -111,7 +110,6 @@ The dashboard shall:
 | Market cap | snapshot refresh | Naver Finance |
 | Daily history | snapshot refresh | Naver daily price endpoint |
 | Consensus | weekly or event-driven | CSV, later paid API |
-| HBM events | manual on news | CSV |
 | Investor flow | daily | optional pykrx/KRX |
 
 ## 9. Acceptance Criteria
@@ -137,5 +135,4 @@ The dashboard shall:
 1. Yahoo and Naver endpoints can change or throttle.
 2. Public quote data is delayed and not suitable for execution.
 3. Consensus data in CSV is only as good as manual maintenance.
-4. HBM event scoring is subjective until formalized with source rules.
-5. Futures expiry logic is holiday-unadjusted and must be replaced with an exchange calendar before trading operations.
+4. Futures expiry logic is holiday-unadjusted and must be replaced with an exchange calendar before trading operations.
