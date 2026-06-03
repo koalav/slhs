@@ -197,17 +197,17 @@
     },
     {
       "as_of_date": "2026-06-02",
-      "generated_at": "2026-06-02T08:54:26.575447+00:00",
+      "generated_at": "2026-06-03T04:46:48.257906+00:00",
       "kind": "base",
       "path": "base/2026-06-02.json",
       "source": "docs/data/base.json",
       "summary": {
         "beta_samsung_on_skhynix_60d": 0.6967541496839532,
         "corr_60d": 0.8263567546459082,
-        "observations": 504,
+        "observations": 503,
         "period_end": "2026-06-02",
-        "period_start": "2024-05-03",
-        "spread_zscore_60d": 1.5081354726181806
+        "period_start": "2024-05-07",
+        "spread_zscore_60d": 1.50813547261818
       }
     },
     {
@@ -259,8 +259,58 @@
           }
         ]
       }
+    },
+    {
+      "as_of_date": "2026-06-03",
+      "generated_at": "2026-06-03T04:46:36.524473+00:00",
+      "kind": "latest",
+      "path": "latest/2026-06-03.json",
+      "source": "docs/data/latest.json",
+      "summary": {
+        "action": "WATCH",
+        "actual_hedge_h": 0.5951330223174883,
+        "samsung_price": 360500.0,
+        "score": 53,
+        "skhynix_price": 2360000.0,
+        "spread_zscore": 1.50813547261818
+      }
+    },
+    {
+      "as_of_date": "2026-06-03",
+      "generated_at": "2026-06-03T04:46:48.323969+00:00",
+      "kind": "research",
+      "path": "research/2026-06-03.json",
+      "source": "docs/data/research.json",
+      "summary": {
+        "coverage": [
+          {
+            "available": true,
+            "key": "expected_target_price",
+            "label": "예상 목표가",
+            "rows": 6
+          },
+          {
+            "available": true,
+            "key": "earnings_trend",
+            "label": "실적 추이",
+            "rows": 10
+          },
+          {
+            "available": true,
+            "key": "major_articles",
+            "label": "주요 기사",
+            "rows": 5
+          },
+          {
+            "available": true,
+            "key": "global_memory_factors",
+            "label": "메모리/글로벌 요소",
+            "rows": 5
+          }
+        ]
+      }
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-06-02T08:54:26.702172+00:00"
+  "updated_at": "2026-06-03T04:46:48.387076+00:00"
 }
