@@ -197,7 +197,7 @@
     },
     {
       "as_of_date": "2026-06-02",
-      "generated_at": "2026-06-03T04:46:48.257906+00:00",
+      "generated_at": "2026-06-03T09:58:08.568204+00:00",
       "kind": "base",
       "path": "base/2026-06-02.json",
       "source": "docs/data/base.json",
@@ -262,7 +262,7 @@
     },
     {
       "as_of_date": "2026-06-03",
-      "generated_at": "2026-06-03T04:46:36.524473+00:00",
+      "generated_at": "2026-06-03T09:57:56.481499+00:00",
       "kind": "latest",
       "path": "latest/2026-06-03.json",
       "source": "docs/data/latest.json",
@@ -277,7 +277,7 @@
     },
     {
       "as_of_date": "2026-06-03",
-      "generated_at": "2026-06-03T04:46:48.323969+00:00",
+      "generated_at": "2026-06-03T09:58:08.634776+00:00",
       "kind": "research",
       "path": "research/2026-06-03.json",
       "source": "docs/data/research.json",
@@ -312,5 +312,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-06-03T04:46:48.387076+00:00"
+  "updated_at": "2026-06-03T09:58:08.699073+00:00"
 }
