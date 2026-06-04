@@ -309,8 +309,73 @@
           }
         ]
       }
+    },
+    {
+      "as_of_date": "2026-06-04",
+      "generated_at": "2026-06-04T04:41:04.549364+00:00",
+      "kind": "base",
+      "path": "base/2026-06-04.json",
+      "source": "docs/data/base.json",
+      "summary": {
+        "beta_samsung_on_skhynix_60d": 0.6924066932668582,
+        "corr_60d": 0.8246641397384744,
+        "observations": 504,
+        "period_end": "2026-06-04",
+        "period_start": "2024-05-07",
+        "spread_zscore_60d": 1.785283463021485
+      }
+    },
+    {
+      "as_of_date": "2026-06-04",
+      "generated_at": "2026-06-04T04:40:52.375678+00:00",
+      "kind": "latest",
+      "path": "latest/2026-06-04.json",
+      "source": "docs/data/latest.json",
+      "summary": {
+        "action": "WATCH",
+        "actual_hedge_h": 0.5820715869496357,
+        "samsung_price": 358750.0,
+        "score": 57,
+        "skhynix_price": 2297000.0,
+        "spread_zscore": 1.7922676951649414
+      }
+    },
+    {
+      "as_of_date": "2026-06-04",
+      "generated_at": "2026-06-04T04:41:04.610600+00:00",
+      "kind": "research",
+      "path": "research/2026-06-04.json",
+      "source": "docs/data/research.json",
+      "summary": {
+        "coverage": [
+          {
+            "available": true,
+            "key": "expected_target_price",
+            "label": "예상 목표가",
+            "rows": 6
+          },
+          {
+            "available": true,
+            "key": "earnings_trend",
+            "label": "실적 추이",
+            "rows": 10
+          },
+          {
+            "available": true,
+            "key": "major_articles",
+            "label": "주요 기사",
+            "rows": 5
+          },
+          {
+            "available": true,
+            "key": "global_memory_factors",
+            "label": "메모리/글로벌 요소",
+            "rows": 5
+          }
+        ]
+      }
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-06-03T09:58:08.699073+00:00"
+  "updated_at": "2026-06-04T04:41:04.671042+00:00"
 }
