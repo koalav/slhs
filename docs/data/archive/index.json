@@ -374,8 +374,73 @@
           }
         ]
       }
+    },
+    {
+      "as_of_date": "2026-06-05",
+      "generated_at": "2026-06-05T04:15:08.221278+00:00",
+      "kind": "base",
+      "path": "base/2026-06-05.json",
+      "source": "docs/data/base.json",
+      "summary": {
+        "beta_samsung_on_skhynix_60d": 0.687627635993903,
+        "corr_60d": 0.8214445252678173,
+        "observations": 505,
+        "period_end": "2026-06-05",
+        "period_start": "2024-05-07",
+        "spread_zscore_60d": 1.241333829491875
+      }
+    },
+    {
+      "as_of_date": "2026-06-05",
+      "generated_at": "2026-06-05T04:14:55.744031+00:00",
+      "kind": "latest",
+      "path": "latest/2026-06-05.json",
+      "source": "docs/data/latest.json",
+      "summary": {
+        "action": "WATCH",
+        "actual_hedge_h": 0.5783628136569313,
+        "samsung_price": 331500.0,
+        "score": 57,
+        "skhynix_price": 2109000.0,
+        "spread_zscore": 1.1956196676201933
+      }
+    },
+    {
+      "as_of_date": "2026-06-05",
+      "generated_at": "2026-06-05T04:15:08.288832+00:00",
+      "kind": "research",
+      "path": "research/2026-06-05.json",
+      "source": "docs/data/research.json",
+      "summary": {
+        "coverage": [
+          {
+            "available": true,
+            "key": "expected_target_price",
+            "label": "예상 목표가",
+            "rows": 6
+          },
+          {
+            "available": true,
+            "key": "earnings_trend",
+            "label": "실적 추이",
+            "rows": 10
+          },
+          {
+            "available": true,
+            "key": "major_articles",
+            "label": "주요 기사",
+            "rows": 5
+          },
+          {
+            "available": true,
+            "key": "global_memory_factors",
+            "label": "메모리/글로벌 요소",
+            "rows": 5
+          }
+        ]
+      }
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-06-04T08:41:48.503821+00:00"
+  "updated_at": "2026-06-05T04:15:08.356997+00:00"
 }
