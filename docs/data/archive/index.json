@@ -1024,8 +1024,73 @@
           }
         ]
       }
+    },
+    {
+      "as_of_date": "2026-06-19",
+      "generated_at": "2026-06-19T04:55:23.866999+00:00",
+      "kind": "base",
+      "path": "base/2026-06-19.json",
+      "source": "docs/data/base.json",
+      "summary": {
+        "beta_samsung_on_skhynix_60d": 0.6937689529125418,
+        "corr_60d": 0.808561456648876,
+        "observations": 507,
+        "period_end": "2026-06-19",
+        "period_start": "2024-05-20",
+        "spread_zscore_60d": -1.4564789012912491
+      }
+    },
+    {
+      "as_of_date": "2026-06-19",
+      "generated_at": "2026-06-19T04:55:11.123662+00:00",
+      "kind": "latest",
+      "path": "latest/2026-06-19.json",
+      "source": "docs/data/latest.json",
+      "summary": {
+        "action": "NO_ENTRY",
+        "actual_hedge_h": 0.7008358711851228,
+        "samsung_price": 350750.0,
+        "score": 33,
+        "skhynix_price": 2704000.0,
+        "spread_zscore": -1.438647759719476
+      }
+    },
+    {
+      "as_of_date": "2026-06-19",
+      "generated_at": "2026-06-19T04:55:23.933045+00:00",
+      "kind": "research",
+      "path": "research/2026-06-19.json",
+      "source": "docs/data/research.json",
+      "summary": {
+        "coverage": [
+          {
+            "available": true,
+            "key": "expected_target_price",
+            "label": "예상 목표가",
+            "rows": 6
+          },
+          {
+            "available": true,
+            "key": "earnings_trend",
+            "label": "실적 추이",
+            "rows": 10
+          },
+          {
+            "available": true,
+            "key": "major_articles",
+            "label": "주요 기사",
+            "rows": 5
+          },
+          {
+            "available": true,
+            "key": "global_memory_factors",
+            "label": "메모리/글로벌 요소",
+            "rows": 5
+          }
+        ]
+      }
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-06-18T09:05:20.569444+00:00"
+  "updated_at": "2026-06-19T04:55:23.999522+00:00"
 }
