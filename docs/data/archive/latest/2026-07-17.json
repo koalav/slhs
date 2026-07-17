@@ -5,7 +5,7 @@
     "available": false,
     "reason": "pykrx is not installed"
   },
-  "generated_at": "2026-07-17T03:13:53.305105+00:00",
+  "generated_at": "2026-07-17T05:57:52.459416+00:00",
   "market": {
     "equities": {
       "samsung": {
@@ -9193,7 +9193,7 @@
         "yahoo_symbol": "000660.KS"
       }
     },
-    "generated_at": "2026-07-17T03:13:53.161838+00:00",
+    "generated_at": "2026-07-17T05:57:52.312157+00:00",
     "macro": {
       "kospi": {
         "error": "empty Yahoo chart result for ^KS11; query1.finance.yahoo.com: failed to fetch JSON: https://query1.finance.yahoo.com/v8/finance/chart/^KS11?range=5d&interval=5m; query2.finance.yahoo.com: failed to fetch JSON: https://query2.finance.yahoo.com/v8/finance/chart/^KS11?range=5d&interval=5m",
