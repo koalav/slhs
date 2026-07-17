@@ -2262,7 +2262,7 @@
     },
     {
       "as_of_date": "2026-07-16",
-      "generated_at": "2026-07-16T08:21:49.107287+00:00",
+      "generated_at": "2026-07-17T03:14:06.122265+00:00",
       "kind": "base",
       "path": "base/2026-07-16.json",
       "source": "docs/data/base.json",
@@ -2324,8 +2324,58 @@
           }
         ]
       }
+    },
+    {
+      "as_of_date": "2026-07-17",
+      "generated_at": "2026-07-17T03:13:53.305105+00:00",
+      "kind": "latest",
+      "path": "latest/2026-07-17.json",
+      "source": "docs/data/latest.json",
+      "summary": {
+        "action": "TEST_1H",
+        "actual_hedge_h": 0.6566844919786097,
+        "samsung_price": 255000.0,
+        "score": 60,
+        "skhynix_price": 1842000.0,
+        "spread_zscore": -1.4520716594886025
+      }
+    },
+    {
+      "as_of_date": "2026-07-17",
+      "generated_at": "2026-07-17T03:14:06.186883+00:00",
+      "kind": "research",
+      "path": "research/2026-07-17.json",
+      "source": "docs/data/research.json",
+      "summary": {
+        "coverage": [
+          {
+            "available": true,
+            "key": "expected_target_price",
+            "label": "예상 목표가",
+            "rows": 6
+          },
+          {
+            "available": true,
+            "key": "earnings_trend",
+            "label": "실적 추이",
+            "rows": 10
+          },
+          {
+            "available": true,
+            "key": "major_articles",
+            "label": "주요 기사",
+            "rows": 5
+          },
+          {
+            "available": true,
+            "key": "global_memory_factors",
+            "label": "메모리/글로벌 요소",
+            "rows": 5
+          }
+        ]
+      }
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-07-16T08:21:49.233008+00:00"
+  "updated_at": "2026-07-17T03:14:06.252421+00:00"
 }
