@@ -5,7 +5,7 @@
     "available": false,
     "reason": "pykrx is not installed"
   },
-  "generated_at": "2026-07-20T06:35:27.262679+00:00",
+  "generated_at": "2026-07-20T09:46:09.341159+00:00",
   "market": {
     "equities": {
       "samsung": {
@@ -4557,11 +4557,11 @@
             "low": 240000.0,
             "open": 241000.0,
             "timestamp": "2026-07-20T15:30:00+09:00",
-            "volume": 24294744
+            "volume": 24305601
           }
         ],
-        "intraday_trading_value_krw": 6002794000000,
-        "intraday_volume": 24294744,
+        "intraday_trading_value_krw": 6005442000000,
+        "intraday_volume": 24305601,
         "key": "samsung",
         "market_cap_krw": 1426491980352000,
         "market_status": "CLOSE",
@@ -9131,11 +9131,11 @@
             "low": 1735000.0,
             "open": 1745000.0,
             "timestamp": "2026-07-20T15:30:00+09:00",
-            "volume": 5852817
+            "volume": 5854187
           }
         ],
-        "intraday_trading_value_krw": 10533436000000,
-        "intraday_volume": 5852817,
+        "intraday_trading_value_krw": 10535852000000,
+        "intraday_volume": 5854187,
         "key": "skhynix",
         "market_cap_krw": 1257206971860000,
         "market_status": "CLOSE",
@@ -9157,7 +9157,7 @@
         "yahoo_symbol": "000660.KS"
       }
     },
-    "generated_at": "2026-07-20T06:35:27.121195+00:00",
+    "generated_at": "2026-07-20T09:46:09.200732+00:00",
     "macro": {
       "kospi": {
         "error": "empty Yahoo chart result for ^KS11; query1.finance.yahoo.com: failed to fetch JSON: https://query1.finance.yahoo.com/v8/finance/chart/^KS11?range=5d&interval=5m; query2.finance.yahoo.com: failed to fetch JSON: https://query2.finance.yahoo.com/v8/finance/chart/^KS11?range=5d&interval=5m",
@@ -9226,8 +9226,8 @@
       "failed_20d_high": true,
       "ratio_below_ma20": true,
       "skhynix_20d_high": 2919000.0,
-      "skhynix_turnover": 0.008212147577200757,
-      "skhynix_turnover_ma20": 0.009113064960855012,
+      "skhynix_turnover": 0.008214069838255693,
+      "skhynix_turnover_ma20": 0.00911316107390776,
       "turnover_fading": true
     },
     "metrics": {
@@ -9239,8 +9239,8 @@
       "samsung_premium": 0.13465166220129032,
       "samsung_vol60": 0.9125820109084967,
       "skhynix_1d_change": -0.04234527687296419,
-      "skhynix_turnover": 0.008212147577200757,
-      "skhynix_turnover_ma20": 0.009113064960855012,
+      "skhynix_turnover": 0.008214069838255693,
+      "skhynix_turnover_ma20": 0.00911316107390776,
       "skhynix_vol60": 1.1018700955594198,
       "spread": -0.2280743013176063,
       "spread_ma20": -0.1997736307565657,
