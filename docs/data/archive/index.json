@@ -2569,8 +2569,73 @@
           }
         ]
       }
+    },
+    {
+      "as_of_date": "2026-07-23",
+      "generated_at": "2026-07-23T03:22:00.489643+00:00",
+      "kind": "base",
+      "path": "base/2026-07-23.json",
+      "source": "docs/data/base.json",
+      "summary": {
+        "beta_samsung_on_skhynix_60d": 0.6944895866462683,
+        "corr_60d": 0.8331371536106525,
+        "observations": 506,
+        "period_end": "2026-07-23",
+        "period_start": "2024-06-24",
+        "spread_zscore_60d": -0.7465934934291955
+      }
+    },
+    {
+      "as_of_date": "2026-07-23",
+      "generated_at": "2026-07-23T03:21:48.904793+00:00",
+      "kind": "latest",
+      "path": "latest/2026-07-23.json",
+      "source": "docs/data/latest.json",
+      "summary": {
+        "action": "TEST_1H",
+        "actual_hedge_h": 0.644038887941327,
+        "samsung_price": 266500.0,
+        "score": 60,
+        "skhynix_price": 1888000.0,
+        "spread_zscore": -0.7861937061794824
+      }
+    },
+    {
+      "as_of_date": "2026-07-23",
+      "generated_at": "2026-07-23T03:22:00.547260+00:00",
+      "kind": "research",
+      "path": "research/2026-07-23.json",
+      "source": "docs/data/research.json",
+      "summary": {
+        "coverage": [
+          {
+            "available": true,
+            "key": "expected_target_price",
+            "label": "예상 목표가",
+            "rows": 6
+          },
+          {
+            "available": true,
+            "key": "earnings_trend",
+            "label": "실적 추이",
+            "rows": 10
+          },
+          {
+            "available": true,
+            "key": "major_articles",
+            "label": "주요 기사",
+            "rows": 5
+          },
+          {
+            "available": true,
+            "key": "global_memory_factors",
+            "label": "메모리/글로벌 요소",
+            "rows": 5
+          }
+        ]
+      }
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-07-22T08:45:55.133260+00:00"
+  "updated_at": "2026-07-23T03:22:00.602095+00:00"
 }
