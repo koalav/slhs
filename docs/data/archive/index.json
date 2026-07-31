@@ -2959,8 +2959,73 @@
           }
         ]
       }
+    },
+    {
+      "as_of_date": "2026-07-31",
+      "generated_at": "2026-07-31T03:27:20.215286+00:00",
+      "kind": "base",
+      "path": "base/2026-07-31.json",
+      "source": "docs/data/base.json",
+      "summary": {
+        "beta_samsung_on_skhynix_60d": 0.7342272152508282,
+        "corr_60d": 0.8742709568820438,
+        "observations": 507,
+        "period_end": "2026-07-31",
+        "period_start": "2024-07-01",
+        "spread_zscore_60d": -0.1415485821790711
+      }
+    },
+    {
+      "as_of_date": "2026-07-31",
+      "generated_at": "2026-07-31T03:27:08.880494+00:00",
+      "kind": "latest",
+      "path": "latest/2026-07-31.json",
+      "source": "docs/data/latest.json",
+      "summary": {
+        "action": "WATCH",
+        "actual_hedge_h": 0.599674679197542,
+        "samsung_price": 251500.0,
+        "score": 47,
+        "skhynix_price": 1659000.0,
+        "spread_zscore": -0.10759408453124672
+      }
+    },
+    {
+      "as_of_date": "2026-07-31",
+      "generated_at": "2026-07-31T03:27:20.258856+00:00",
+      "kind": "research",
+      "path": "research/2026-07-31.json",
+      "source": "docs/data/research.json",
+      "summary": {
+        "coverage": [
+          {
+            "available": true,
+            "key": "expected_target_price",
+            "label": "예상 목표가",
+            "rows": 6
+          },
+          {
+            "available": true,
+            "key": "earnings_trend",
+            "label": "실적 추이",
+            "rows": 10
+          },
+          {
+            "available": true,
+            "key": "major_articles",
+            "label": "주요 기사",
+            "rows": 5
+          },
+          {
+            "available": true,
+            "key": "global_memory_factors",
+            "label": "메모리/글로벌 요소",
+            "rows": 5
+          }
+        ]
+      }
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-07-30T07:56:09.056194+00:00"
+  "updated_at": "2026-07-31T03:27:20.300201+00:00"
 }
