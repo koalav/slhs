@@ -3544,8 +3544,73 @@
           }
         ]
       }
+    },
+    {
+      "as_of_date": "2026-08-13",
+      "generated_at": "2026-08-13T02:22:22.353844+00:00",
+      "kind": "base",
+      "path": "base/2026-08-13.json",
+      "source": "docs/data/base.json",
+      "summary": {
+        "beta_samsung_on_skhynix_60d": 0.7385856235029863,
+        "corr_60d": 0.8856435370571843,
+        "observations": 506,
+        "period_end": "2026-08-13",
+        "period_start": "2024-07-15",
+        "spread_zscore_60d": 1.489438752687863
+      }
+    },
+    {
+      "as_of_date": "2026-08-13",
+      "generated_at": "2026-08-13T02:22:10.375887+00:00",
+      "kind": "latest",
+      "path": "latest/2026-08-13.json",
+      "source": "docs/data/latest.json",
+      "summary": {
+        "action": "WATCH",
+        "actual_hedge_h": 0.5452855694491382,
+        "samsung_price": 269000.0,
+        "score": 43,
+        "skhynix_price": 1613500.0,
+        "spread_zscore": 1.448562799988394
+      }
+    },
+    {
+      "as_of_date": "2026-08-13",
+      "generated_at": "2026-08-13T02:22:22.417012+00:00",
+      "kind": "research",
+      "path": "research/2026-08-13.json",
+      "source": "docs/data/research.json",
+      "summary": {
+        "coverage": [
+          {
+            "available": true,
+            "key": "expected_target_price",
+            "label": "예상 목표가",
+            "rows": 6
+          },
+          {
+            "available": true,
+            "key": "earnings_trend",
+            "label": "실적 추이",
+            "rows": 10
+          },
+          {
+            "available": true,
+            "key": "major_articles",
+            "label": "주요 기사",
+            "rows": 5
+          },
+          {
+            "available": true,
+            "key": "global_memory_factors",
+            "label": "메모리/글로벌 요소",
+            "rows": 5
+          }
+        ]
+      }
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-12T07:44:12.150955+00:00"
+  "updated_at": "2026-08-13T02:22:22.480774+00:00"
 }
