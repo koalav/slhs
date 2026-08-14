@@ -3609,8 +3609,73 @@
           }
         ]
       }
+    },
+    {
+      "as_of_date": "2026-08-14",
+      "generated_at": "2026-08-14T02:20:25.089441+00:00",
+      "kind": "base",
+      "path": "base/2026-08-14.json",
+      "source": "docs/data/base.json",
+      "summary": {
+        "beta_samsung_on_skhynix_60d": 0.7398262234023699,
+        "corr_60d": 0.885152008305227,
+        "observations": 507,
+        "period_end": "2026-08-14",
+        "period_start": "2024-07-15",
+        "spread_zscore_60d": 1.2355209442350248
+      }
+    },
+    {
+      "as_of_date": "2026-08-14",
+      "generated_at": "2026-08-14T02:20:12.193979+00:00",
+      "kind": "latest",
+      "path": "latest/2026-08-14.json",
+      "source": "docs/data/latest.json",
+      "summary": {
+        "action": "WATCH",
+        "actual_hedge_h": 0.5552369708213865,
+        "samsung_price": 269500.0,
+        "score": 47,
+        "skhynix_price": 1646000.0,
+        "spread_zscore": 1.2355209442350248
+      }
+    },
+    {
+      "as_of_date": "2026-08-14",
+      "generated_at": "2026-08-14T02:20:25.151325+00:00",
+      "kind": "research",
+      "path": "research/2026-08-14.json",
+      "source": "docs/data/research.json",
+      "summary": {
+        "coverage": [
+          {
+            "available": true,
+            "key": "expected_target_price",
+            "label": "예상 목표가",
+            "rows": 6
+          },
+          {
+            "available": true,
+            "key": "earnings_trend",
+            "label": "실적 추이",
+            "rows": 10
+          },
+          {
+            "available": true,
+            "key": "major_articles",
+            "label": "주요 기사",
+            "rows": 5
+          },
+          {
+            "available": true,
+            "key": "global_memory_factors",
+            "label": "메모리/글로벌 요소",
+            "rows": 5
+          }
+        ]
+      }
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-13T07:54:54.967390+00:00"
+  "updated_at": "2026-08-14T02:20:25.213666+00:00"
 }
