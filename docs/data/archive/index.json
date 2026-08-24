@@ -3987,37 +3987,37 @@
     },
     {
       "as_of_date": "2026-08-24",
-      "generated_at": "2026-08-24T01:39:42.512436+00:00",
+      "generated_at": "2026-08-24T02:50:38.918683+00:00",
       "kind": "base",
       "path": "base/2026-08-24.json",
       "source": "docs/data/base.json",
       "summary": {
-        "beta_samsung_on_skhynix_60d": 0.7534846263273886,
-        "corr_60d": 0.8825525207795275,
+        "beta_samsung_on_skhynix_60d": 0.7578290303999249,
+        "corr_60d": 0.8851478268066652,
         "observations": 504,
         "period_end": "2026-08-24",
         "period_start": "2024-07-25",
-        "spread_zscore_60d": 0.09492049771000942
+        "spread_zscore_60d": 0.16820988837294018
       }
     },
     {
       "as_of_date": "2026-08-24",
-      "generated_at": "2026-08-24T01:39:30.109988+00:00",
+      "generated_at": "2026-08-24T02:50:28.491660+00:00",
       "kind": "latest",
       "path": "latest/2026-08-24.json",
       "source": "docs/data/latest.json",
       "summary": {
         "action": "NO_ENTRY",
-        "actual_hedge_h": 0.603180089872105,
-        "samsung_price": 263000.0,
+        "actual_hedge_h": 0.5964055138719246,
+        "samsung_price": 260500.0,
         "score": 29,
-        "skhynix_price": 1745000.0,
-        "spread_zscore": 0.11712362613580095
+        "skhynix_price": 1709000.0,
+        "spread_zscore": 0.18738365059825482
       }
     },
     {
       "as_of_date": "2026-08-24",
-      "generated_at": "2026-08-24T01:39:42.578852+00:00",
+      "generated_at": "2026-08-24T02:50:38.982288+00:00",
       "kind": "research",
       "path": "research/2026-08-24.json",
       "source": "docs/data/research.json",
@@ -4052,5 +4052,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-08-24T01:39:42.647870+00:00"
+  "updated_at": "2026-08-24T02:50:39.048331+00:00"
 }
