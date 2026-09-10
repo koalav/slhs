@@ -4829,8 +4829,73 @@
           }
         ]
       }
+    },
+    {
+      "as_of_date": "2026-09-10",
+      "generated_at": "2026-09-10T04:00:15.336174+00:00",
+      "kind": "base",
+      "path": "base/2026-09-10.json",
+      "source": "docs/data/base.json",
+      "summary": {
+        "beta_samsung_on_skhynix_60d": 0.757424985542375,
+        "corr_60d": 0.9088835463481553,
+        "observations": 505,
+        "period_end": "2026-09-10",
+        "period_start": "2024-08-12",
+        "spread_zscore_60d": -0.08977480985465472
+      }
+    },
+    {
+      "as_of_date": "2026-09-10",
+      "generated_at": "2026-09-10T04:00:02.973344+00:00",
+      "kind": "latest",
+      "path": "latest/2026-09-10.json",
+      "source": "docs/data/latest.json",
+      "summary": {
+        "action": "NO_ENTRY",
+        "actual_hedge_h": 0.6275110657133129,
+        "samsung_price": 267000.0,
+        "score": 28,
+        "skhynix_price": 1843000.0,
+        "spread_zscore": -0.08214697273055502
+      }
+    },
+    {
+      "as_of_date": "2026-09-10",
+      "generated_at": "2026-09-10T04:00:15.399333+00:00",
+      "kind": "research",
+      "path": "research/2026-09-10.json",
+      "source": "docs/data/research.json",
+      "summary": {
+        "coverage": [
+          {
+            "available": true,
+            "key": "expected_target_price",
+            "label": "예상 목표가",
+            "rows": 6
+          },
+          {
+            "available": true,
+            "key": "earnings_trend",
+            "label": "실적 추이",
+            "rows": 10
+          },
+          {
+            "available": true,
+            "key": "major_articles",
+            "label": "주요 기사",
+            "rows": 5
+          },
+          {
+            "available": true,
+            "key": "global_memory_factors",
+            "label": "메모리/글로벌 요소",
+            "rows": 5
+          }
+        ]
+      }
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-09T08:59:09.306519+00:00"
+  "updated_at": "2026-09-10T04:00:15.461153+00:00"
 }
