@@ -5,11 +5,11 @@
     "available": false,
     "reason": "pykrx is not installed"
   },
-  "generated_at": "2026-09-14T04:16:19.907835+00:00",
+  "generated_at": "2026-09-14T10:04:02.868751+00:00",
   "market": {
     "equities": {
       "samsung": {
-        "change_pct": -0.029900000000000003,
+        "change_pct": -0.0443,
         "code": "005930",
         "currency": "KRW",
         "exchange": "KOSPI",
@@ -4542,25 +4542,25 @@
             "volume": 13939111.0
           },
           {
-            "close": 251750.0,
+            "close": 248000.0,
             "date": "2026-09-14",
             "high": 254500.0,
-            "low": 249000.0,
+            "low": 247000.0,
             "open": 249500.0,
-            "timestamp": "2026-09-14T13:16:10.282571+09:00",
-            "volume": 10263193
+            "timestamp": "2026-09-14T19:03:51.726578+09:00",
+            "volume": 17390444
           }
         ],
-        "intraday_trading_value_krw": 2577648000000,
-        "intraday_volume": 10263193,
+        "intraday_trading_value_krw": 4355575000000,
+        "intraday_volume": 17390444,
         "key": "samsung",
-        "market_cap_krw": 1471800639564000,
+        "market_cap_krw": 1449877094784000,
         "market_status": "OPEN",
         "name": "Samsung Electronics",
         "pbr": null,
         "per": null,
         "previous_close": 259500.0,
-        "price": 251750.0,
+        "price": 248000.0,
         "profile_source": "naver_finance",
         "quote_source": "naver_realtime",
         "shares_outstanding": 5846278608,
@@ -4570,11 +4570,11 @@
         ],
         "symbol": "005930.KS",
         "timezone": "Asia/Seoul",
-        "updated_at": "2026-09-14T13:16:10.282571+09:00",
+        "updated_at": "2026-09-14T19:03:51.726578+09:00",
         "yahoo_symbol": "005930.KS"
       },
       "skhynix": {
-        "change_pct": -0.0557,
+        "change_pct": -0.0723,
         "code": "000660",
         "currency": "KRW",
         "exchange": "KOSPI",
@@ -9107,25 +9107,25 @@
             "volume": 2625165.0
           },
           {
-            "close": 1711000.0,
+            "close": 1681000.0,
             "date": "2026-09-14",
             "high": 1740000.0,
-            "low": 1695000.0,
+            "low": 1678000.0,
             "open": 1707000.0,
-            "timestamp": "2026-09-14T13:16:13.471771+09:00",
-            "volume": 2494169
+            "timestamp": "2026-09-14T19:03:56.122233+09:00",
+            "volume": 3915866
           }
         ],
-        "intraday_trading_value_krw": 4283140000000,
-        "intraday_volume": 2494169,
+        "intraday_trading_value_krw": 6697056000000,
+        "intraday_volume": 3915866,
         "key": "skhynix",
-        "market_cap_krw": 1249872436515000,
+        "market_cap_krw": 1227957665565000,
         "market_status": "OPEN",
         "name": "SK Hynix",
         "pbr": null,
         "per": null,
         "previous_close": 1812000.0,
-        "price": 1711000.0,
+        "price": 1681000.0,
         "profile_source": "naver_finance",
         "quote_source": "naver_realtime",
         "shares_outstanding": 712702365,
@@ -9135,11 +9135,11 @@
         ],
         "symbol": "000660.KS",
         "timezone": "Asia/Seoul",
-        "updated_at": "2026-09-14T13:16:13.471771+09:00",
+        "updated_at": "2026-09-14T19:03:56.122233+09:00",
         "yahoo_symbol": "000660.KS"
       }
     },
-    "generated_at": "2026-09-14T04:16:19.763132+00:00",
+    "generated_at": "2026-09-14T10:04:02.723420+00:00",
     "macro": {
       "kospi": {
         "error": "empty Yahoo chart result for ^KS11; query1.finance.yahoo.com: failed to fetch JSON: https://query1.finance.yahoo.com/v8/finance/chart/^KS11?range=5d&interval=5m; query2.finance.yahoo.com: failed to fetch JSON: https://query2.finance.yahoo.com/v8/finance/chart/^KS11?range=5d&interval=5m",
@@ -9198,75 +9198,75 @@
       "revision_diff": 0.016567460317460148,
       "samsung_op_2026_revision": 0.05624999999999991,
       "samsung_target_price": 361046.0,
-      "samsung_target_upside": 0.43414498510427,
+      "samsung_target_upside": 0.45583064516129035,
       "skhynix_op_2026_revision": 0.039682539682539764,
       "skhynix_target_price": 2076603.0,
-      "skhynix_target_upside": 0.21367796610169498,
-      "target_pair_signal": 0.29311752747715136
+      "skhynix_target_upside": 0.23533789411064832,
+      "target_pair_signal": 0.30050763504826244
     },
     "flags": {
       "failed_20d_high": true,
       "ratio_below_ma20": false,
       "skhynix_20d_high": 1856000.0,
-      "skhynix_turnover": 0.00349959411177203,
-      "skhynix_turnover_ma20": 0.005075397918737087,
-      "turnover_fading": true
+      "skhynix_turnover": 0.005494391757771142,
+      "skhynix_turnover_ma20": 0.005175137801037043,
+      "turnover_fading": false
     },
     "metrics": {
-      "corr60": 0.9096371608871783,
-      "mcap_ratio": 0.8285318770320959,
-      "mcap_ratio_ma20": 0.7927821652775299,
-      "ols_beta60": 0.7625297130981638,
-      "samsung_1d_change": -0.029865125240847834,
-      "samsung_premium": 0.20695416521827048,
-      "samsung_vol60": 1.0102494296195206,
-      "skhynix_1d_change": -0.05573951434878588,
-      "skhynix_turnover": 0.00349959411177203,
-      "skhynix_turnover_ma20": 0.005075397918737087,
-      "skhynix_vol60": 1.2051470351407674,
-      "spread": -0.2737782253642771,
-      "spread_ma20": -0.23126374567158067,
-      "spread_zscore": -0.2502491454831849,
+      "corr60": 0.910103075801292,
+      "mcap_ratio": 0.8263132646726057,
+      "mcap_ratio_ma20": 0.7926712346595554,
+      "ols_beta60": 0.7621166739550682,
+      "samsung_1d_change": -0.044315992292870865,
+      "samsung_premium": 0.2101947805427169,
+      "samsung_vol60": 1.0122539133930044,
+      "skhynix_1d_change": -0.07229580573951433,
+      "skhynix_turnover": 0.005494391757771142,
+      "skhynix_turnover_ma20": 0.005175137801037043,
+      "skhynix_vol60": 1.2088115003309612,
+      "spread": -0.27711117807880514,
+      "spread_ma20": -0.23143039330730708,
+      "spread_zscore": -0.322633608415041,
       "spread_zscore_min10": -0.43640745914751666,
-      "vol_hedge_h": 0.8382789818683977
+      "vol_hedge_h": 0.8373959985621073
     },
     "position_1h": {
-      "actual_hedge_h": 0.6178568204387469,
+      "actual_hedge_h": 0.6162023460410557,
       "business_days_to_expiry": 63,
       "futures_multiplier": 10,
-      "gross_notional_krw": 44802500.0,
-      "margin_estimate_krw": 13063192.5,
-      "net_notional_krw": 10582500.0,
+      "gross_notional_krw": 44090000.0,
+      "margin_estimate_krw": 12855405.0,
+      "net_notional_krw": 10470000.0,
       "next_expiry": "2026-12-10",
-      "recommended_cash_3x_margin_krw": 39189577.5,
+      "recommended_cash_3x_margin_krw": 38566215.0,
       "rollover_watch": false,
       "samsung_contracts": 11,
-      "samsung_notional_krw": 27692500.0,
+      "samsung_notional_krw": 27280000.0,
       "skhynix_contracts": 1,
-      "skhynix_notional_krw": 17110000.0,
+      "skhynix_notional_krw": 16810000.0,
       "stress": [
         {
-          "estimated_1h_pnl_krw": -5538500.0,
+          "estimated_1h_pnl_krw": -5456000.0,
           "weighted_spread_move": -0.2
         },
         {
-          "estimated_1h_pnl_krw": -2769250.0,
+          "estimated_1h_pnl_krw": -2728000.0,
           "weighted_spread_move": -0.1
         },
         {
-          "estimated_1h_pnl_krw": -1938475.0000000002,
+          "estimated_1h_pnl_krw": -1909600.0000000002,
           "weighted_spread_move": -0.07
         },
         {
-          "estimated_1h_pnl_krw": -1384625.0,
+          "estimated_1h_pnl_krw": -1364000.0,
           "weighted_spread_move": -0.05
         },
         {
-          "estimated_1h_pnl_krw": 1384625.0,
+          "estimated_1h_pnl_krw": 1364000.0,
           "weighted_spread_move": 0.05
         },
         {
-          "estimated_1h_pnl_krw": 2769250.0,
+          "estimated_1h_pnl_krw": 2728000.0,
           "weighted_spread_move": 0.1
         }
       ]
@@ -9276,7 +9276,7 @@
       "action_label": "진입 금지",
       "components": {
         "earnings_revision": 10,
-        "hynix_fade": 7,
+        "hynix_fade": 4,
         "spread_oversold": 0,
         "spread_reversal": 0,
         "value_gap": 12
@@ -9285,7 +9285,7 @@
       "required": {
         "spread_reversal_confirmed": false
       },
-      "total": 29
+      "total": 26
     },
     "series": {
       "dates": [
@@ -9650,7 +9650,7 @@
         0.839553,
         0.839754,
         0.851235,
-        0.828532
+        0.826313
       ],
       "mcap_ratio_ma20": [
         0.640206,
@@ -9832,7 +9832,7 @@
         0.775445,
         0.781552,
         0.787883,
-        0.792782
+        0.792671
       ],
       "samsung_close": [
         107600.0,
@@ -10014,7 +10014,7 @@
         269500.0,
         269000.0,
         259500.0,
-        251750.0
+        248000.0
       ],
       "skhynix_close": [
         552000.0,
@@ -10196,7 +10196,7 @@
         1856000.0,
         1853000.0,
         1812000.0,
-        1711000.0
+        1681000.0
       ],
       "spread": [
         -0.377146,
@@ -10378,7 +10378,7 @@
         -0.259334,
         -0.260124,
         -0.281311,
-        -0.273778
+        -0.277111
       ],
       "spread_ma20": [
         -0.40345,
@@ -10560,7 +10560,7 @@
         -0.215466,
         -0.219778,
         -0.22564,
-        -0.231264
+        -0.23143
       ],
       "spread_zscore": [
         0.4572,
@@ -10742,7 +10742,7 @@
         -0.0098,
         0.0008,
         -0.4364,
-        -0.2502
+        -0.3226
       ]
     }
   }
