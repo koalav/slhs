@@ -5157,22 +5157,22 @@
     },
     {
       "as_of_date": "2026-09-17",
-      "generated_at": "2026-09-17T04:19:17.497126+00:00",
+      "generated_at": "2026-09-17T09:36:37.434137+00:00",
       "kind": "base",
       "path": "base/2026-09-17.json",
       "source": "docs/data/base.json",
       "summary": {
-        "beta_samsung_on_skhynix_60d": 0.7623845229081521,
-        "corr_60d": 0.9152052851450879,
+        "beta_samsung_on_skhynix_60d": 0.7623200893209886,
+        "corr_60d": 0.9152031455075873,
         "observations": 506,
         "period_end": "2026-09-17",
         "period_start": "2024-08-19",
-        "spread_zscore_60d": -0.39685944222181413
+        "spread_zscore_60d": -0.4452828108041416
       }
     },
     {
       "as_of_date": "2026-09-17",
-      "generated_at": "2026-09-17T04:19:06.132835+00:00",
+      "generated_at": "2026-09-17T09:36:24.452363+00:00",
       "kind": "latest",
       "path": "latest/2026-09-17.json",
       "source": "docs/data/latest.json",
@@ -5187,7 +5187,7 @@
     },
     {
       "as_of_date": "2026-09-17",
-      "generated_at": "2026-09-17T04:19:17.542940+00:00",
+      "generated_at": "2026-09-17T09:36:37.500592+00:00",
       "kind": "research",
       "path": "research/2026-09-17.json",
       "source": "docs/data/research.json",
@@ -5222,5 +5222,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-09-17T04:19:17.586670+00:00"
+  "updated_at": "2026-09-17T09:36:37.567382+00:00"
 }

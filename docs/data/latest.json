@@ -5,7 +5,7 @@
     "available": false,
     "reason": "pykrx is not installed"
   },
-  "generated_at": "2026-09-17T04:19:06.132835+00:00",
+  "generated_at": "2026-09-17T09:36:24.452363+00:00",
   "market": {
     "equities": {
       "samsung": {
@@ -4563,14 +4563,14 @@
             "close": 255000.0,
             "date": "2026-09-17",
             "high": 259000.0,
-            "low": 252000.0,
+            "low": 251500.0,
             "open": 257000.0,
-            "timestamp": "2026-09-17T13:18:56.763407+09:00",
-            "volume": 6467375
+            "timestamp": "2026-09-17T18:36:13.971147+09:00",
+            "volume": 11062627
           }
         ],
-        "intraday_trading_value_krw": 1645255000000,
-        "intraday_volume": 6467375,
+        "intraday_trading_value_krw": 2810411000000,
+        "intraday_volume": 11062627,
         "key": "samsung",
         "market_cap_krw": 1490801045040000,
         "market_status": "OPEN",
@@ -4588,7 +4588,7 @@
         ],
         "symbol": "005930.KS",
         "timezone": "Asia/Seoul",
-        "updated_at": "2026-09-17T13:18:56.763407+09:00",
+        "updated_at": "2026-09-17T18:36:13.971147+09:00",
         "yahoo_symbol": "005930.KS"
       },
       "skhynix": {
@@ -9148,12 +9148,12 @@
             "high": 1785000.0,
             "low": 1735000.0,
             "open": 1770000.0,
-            "timestamp": "2026-09-17T13:18:59.831083+09:00",
-            "volume": 1674774
+            "timestamp": "2026-09-17T18:36:17.962235+09:00",
+            "volume": 2620224
           }
         ],
-        "intraday_trading_value_krw": 2936675000000,
-        "intraday_volume": 1674774,
+        "intraday_trading_value_krw": 4596216000000,
+        "intraday_volume": 2620224,
         "key": "skhynix",
         "market_cap_krw": 1287127547130000,
         "market_status": "OPEN",
@@ -9171,11 +9171,11 @@
         ],
         "symbol": "000660.KS",
         "timezone": "Asia/Seoul",
-        "updated_at": "2026-09-17T13:18:59.831083+09:00",
+        "updated_at": "2026-09-17T18:36:17.962235+09:00",
         "yahoo_symbol": "000660.KS"
       }
     },
-    "generated_at": "2026-09-17T04:19:06.051410+00:00",
+    "generated_at": "2026-09-17T09:36:24.310987+00:00",
     "macro": {
       "kospi": {
         "error": "empty Yahoo chart result for ^KS11; query1.finance.yahoo.com: failed to fetch JSON: https://query1.finance.yahoo.com/v8/finance/chart/^KS11?range=5d&interval=5m; query2.finance.yahoo.com: failed to fetch JSON: https://query2.finance.yahoo.com/v8/finance/chart/^KS11?range=5d&interval=5m",
@@ -9244,8 +9244,8 @@
       "failed_20d_high": true,
       "ratio_below_ma20": false,
       "skhynix_20d_high": 1856000.0,
-      "skhynix_turnover": 0.002349892581035563,
-      "skhynix_turnover_ma20": 0.004651441278716677,
+      "skhynix_turnover": 0.0036764631754799917,
+      "skhynix_turnover_ma20": 0.004717769808438898,
       "turnover_fading": true
     },
     "metrics": {
@@ -9257,8 +9257,8 @@
       "samsung_premium": 0.1871499662533831,
       "samsung_vol60": 0.9779602442933785,
       "skhynix_1d_change": 0.0017055144968731728,
-      "skhynix_turnover": 0.002349892581035563,
-      "skhynix_turnover_ma20": 0.004651441278716677,
+      "skhynix_turnover": 0.0036764631754799917,
+      "skhynix_turnover_ma20": 0.004717769808438898,
       "skhynix_vol60": 1.1740236643159756,
       "spread": -0.2758131390416938,
       "spread_ma20": -0.2397144648886108,
