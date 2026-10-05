@@ -5,7 +5,7 @@
     "spread": "log(Samsung/Samsung_0) - h * log(SK Hynix/SK Hynix_0)",
     "vol_hedge_h": "Samsung 60D annualized volatility / SK Hynix 60D annualized volatility"
   },
-  "generated_at": "2026-10-05T04:57:21.537088+00:00",
+  "generated_at": "2026-10-05T12:11:56.600088+00:00",
   "latest": {
     "beta_samsung_on_skhynix_60d": 0.7972058375723402,
     "beta_skhynix_on_samsung_60d": 1.1000117329542634,
