@@ -6589,8 +6589,73 @@
           }
         ]
       }
+    },
+    {
+      "as_of_date": "2026-10-20",
+      "generated_at": "2026-10-20T04:16:07.663235+00:00",
+      "kind": "base",
+      "path": "base/2026-10-20.json",
+      "source": "docs/data/base.json",
+      "summary": {
+        "beta_samsung_on_skhynix_60d": 0.813276800551125,
+        "corr_60d": 0.9399616473747737,
+        "observations": 504,
+        "period_end": "2026-10-20",
+        "period_start": "2024-09-20",
+        "spread_zscore_60d": 0.3808412603452441
+      }
+    },
+    {
+      "as_of_date": "2026-10-20",
+      "generated_at": "2026-10-20T04:15:56.292125+00:00",
+      "kind": "latest",
+      "path": "latest/2026-10-20.json",
+      "source": "docs/data/latest.json",
+      "summary": {
+        "action": "WATCH",
+        "actual_hedge_h": 0.5251565536601166,
+        "samsung_price": 210500.0,
+        "score": 43,
+        "skhynix_price": 1216000.0,
+        "spread_zscore": 0.36682385514351995
+      }
+    },
+    {
+      "as_of_date": "2026-10-20",
+      "generated_at": "2026-10-20T04:16:07.731255+00:00",
+      "kind": "research",
+      "path": "research/2026-10-20.json",
+      "source": "docs/data/research.json",
+      "summary": {
+        "coverage": [
+          {
+            "available": true,
+            "key": "expected_target_price",
+            "label": "예상 목표가",
+            "rows": 6
+          },
+          {
+            "available": true,
+            "key": "earnings_trend",
+            "label": "실적 추이",
+            "rows": 10
+          },
+          {
+            "available": true,
+            "key": "major_articles",
+            "label": "주요 기사",
+            "rows": 5
+          },
+          {
+            "available": true,
+            "key": "global_memory_factors",
+            "label": "메모리/글로벌 요소",
+            "rows": 5
+          }
+        ]
+      }
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-10-19T09:56:29.372247+00:00"
+  "updated_at": "2026-10-20T04:16:07.816606+00:00"
 }
